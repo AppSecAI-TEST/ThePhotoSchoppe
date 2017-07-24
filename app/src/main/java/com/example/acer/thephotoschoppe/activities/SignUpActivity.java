@@ -37,18 +37,26 @@ public class SignUpActivity extends AppCompatActivity {
         return preferences;
     }
 
+    DatabaseHandler dbHandler;
+    private DatabaseHandler getDBHandler(){
+        if(dbHandler==null){
+            dbHandler=new DatabaseHandler(this);
+        }
+        return dbHandler;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
         //Check exists database
         File database = getApplicationContext().getDatabasePath(DatabaseHandler.getDBName());
         if(false == database.exists()) {
-            mDBHelper.getReadableDatabase();
+            getDBHandler().getReadableDatabase();
             //Copy db
             if(copyDatabase(this)) {
-                Toast.makeText(this, "Copy database succes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Copy database success", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
                 return;
@@ -97,7 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
             outputStream.flush();
             outputStream.close();
-            Log.w("MainActivity","DB copied");
+            Log.d(TAG,"DB copied");
             return true;
         }catch (Exception e) {
             e.printStackTrace();

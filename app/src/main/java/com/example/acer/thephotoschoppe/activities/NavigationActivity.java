@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.acer.thephotoschoppe.R;
 
@@ -35,6 +39,7 @@ public class NavigationActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
 //        TextView textView=(TextView)findViewById(R.id. textView);
 //        textView.setText(getInstance().getString(getString(R.string.key_email),"sample@gmail.com"));
 
@@ -55,7 +60,30 @@ public class NavigationActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public  boolean onNavigationItemSelected(MenuItem menuItem) {
+                Log.d(TAG,"inside on navigation");
+                Log.d(TAG,R.id.nav_directory+"");
+                return false;
+            }
+
+            });
+
+        navigationView.getMenu().getItem(0).setChecked(true);
+//        Log.d(TAG,""+navigationView.findViewById(R.id.nav_directory));
+//        NavigationView nav_directory=(NavigationView)navigationView.findViewById(R.id.nav_directory);
+//        nav_directory.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                int id=item.getItemId();
+//                if(id==R.id.nav_directory){
+//                    Log.d(TAG,"directory");
+//                }
+//
+//                return false;
+//            }
+//        });
     }
 
     @Override
@@ -97,20 +125,38 @@ public class NavigationActivity extends AppCompatActivity
             startActivity(intent);
             finish();
 
+        }else if(id==R.id.nav_directory){
+            Log.d(TAG,"directory");
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+//    public void onClickDirectory(View view){
+//        View layout=(View) findViewById(R.id.directory);
+//        layout.setVisibility(View.VISIBLE);
+//        Log.d(TAG,"inside if");
+//
+//    }
+//    public void onClickPortfolio(View view){
+//
+//    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Log.d(TAG,"inside on navigation");
+        Log.d(TAG,R.id.nav_directory+"");
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_portfolio) {
+            Log.d(TAG,"inside if");
             // Handle the camera action
         } else if (id == R.id.nav_directory) {
+            View layout=(View) findViewById(R.id.directory);
+            layout.setVisibility(View.VISIBLE);
+            Log.d(TAG,"inside if");
+
 
         } else if (id == R.id.nav_more) {
 

@@ -24,14 +24,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION=1;
 
     private  Context context;
-    private SQLiteDatabase database;
+    private static SQLiteDatabase database;
 
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context=context;
     }
-
 
 
     @Override
