@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -13,32 +15,39 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_sign_up)
-public class SignUpActivity extends RoboActivity {
 
-    @InjectView(R.id.txt_username) private EditText txt_username;
-    @InjectView(R.id.txt_password) private EditText txt_password;
-    @InjectView(R.id.txt_confirm_password) private EditText txt_confirm_password;
-    @InjectView(R.id.txt_email) private EditText txt_email;
+public class SignUpActivity extends AppCompatActivity {
+
 
     private static final String TAG="SignUpActivity";
 
-    private static final String KEY_REGISTERED="registered";
-    private static final String KEY_USERNAME="username";
-    private static final String KEY_PASSWORD="password";
-    private static final String KEY_EMAIL="email";
-    private static final String KEY_LOGIN="login";
+    private EditText txt_username;
+    private EditText txt_password;
+    private EditText txt_confirm_password;
+    private EditText txt_email;
 
-
-
+    SharedPreferences preferences;
+    private SharedPreferences getInstance(){
+        if(preferences==null){
+            preferences=getSharedPreferences(getString(R.string.shared_preferences), Context.MODE_PRIVATE);
+        }
+        return preferences;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
 
-        SharedPreferences preferences=getSharedPreferences(getString(R.string.shared_preferences), Context.MODE_PRIVATE);
-        boolean isRegister=preferences.getBoolean(KEY_REGISTERED,false);
-        boolean isLoggedIn=preferences.getBoolean(KEY_LOGIN,false);
+
+        txt_username=(EditText)findViewById(R.id.txt_username);
+        txt_password=(EditText)findViewById(R.id.txt_password);
+        txt_confirm_password=(EditText)findViewById(R.id.txt_confirm_password);
+        txt_email=(EditText)findViewById(R.id.txt_email);
+
+
+        boolean isRegister=getInstance().getBoolean(getString(R.string.key_registered),false);
+        boolean isLoggedIn=getInstance().getBoolean(getString(R.string.key_login),false);
         if(isRegister){
             if(isLoggedIn){
                 Intent intent =new Intent(SignUpActivity.this,NavigationActivity.class);
@@ -62,9 +71,9 @@ public class SignUpActivity extends RoboActivity {
 
     public void saveSettings(View view){
         Log.d(TAG,"on click save");
-        SharedPreferences preferences=getSharedPreferences(getString(R.string.shared_preferences),Context.MODE_PRIVATE);
+
         //initialize editor to edit
-        SharedPreferences.Editor editor=preferences.edit();
+        SharedPreferences.Editor editor=getInstance().edit();
         //add data to the editor
         Log.d(TAG,txt_confirm_password.getText()+"");
         if(txt_username.getText().toString().equals("") ||
@@ -80,30 +89,28 @@ public class SignUpActivity extends RoboActivity {
             return;
         }
         else {
-            editor.putBoolean(KEY_REGISTERED,true);
-            editor.putString(KEY_USERNAME,txt_username.getText().toString());
-            editor.putString(KEY_PASSWORD,txt_password.getText().toString());
-            editor.putString(KEY_EMAIL,txt_email.getText().toString());
-            editor.putBoolean(KEY_LOGIN,true);
+
+
+            editor.putBoolean(getString(R.string.key_registered), true);
+            editor.putString(getString(R.string.key_username), txt_username.getText().toString());
+            editor.putString(getString(R.string.key_password), txt_password.getText().toString());
+            editor.putString(getString(R.string.key_email), txt_email.getText().toString());
+            editor.putBoolean(getString(R.string.key_login), true);
             //commit changes to the shared preferences
             editor.commit();
 
             //success message
-            Toast.makeText(SignUpActivity.this,"User registered successfully",Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
+
 
 
             //start new activity and kill the current activity
-            Intent intent=new Intent(SignUpActivity.this,NavigationActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, NavigationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
 
         }
-
-
-
     }
-
-
 
 }
