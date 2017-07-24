@@ -6,58 +6,70 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    tools:context="com.example.acer.thephotoschoppe.SignUpActivity">
-    <TextView
+    tools:context="com.example.acer.thephotoschoppe.activities.SignUpActivity">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
 
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="25dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
 
-    <EditText
-        android:id="@+id/txt_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:inputType="text"
-        android:hint="Username" />
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="25dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_password"
-        android:layout_margin="5dp"
-        android:inputType="textPassword"
-        android:hint="Password"/>
+            <EditText
+                android:id="@+id/txt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:inputType="text"
+                android:hint="Username" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_password"
+                android:layout_margin="5dp"
+                android:inputType="textPassword"
+                android:hint="Password"/>
 
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_confirm_password"
-        android:layout_margin="5dp"
-        android:inputType="textPassword"
-        android:hint="Confirm password"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_confirm_password"
+                android:layout_margin="5dp"
+                android:inputType="textPassword"
+                android:hint="Confirm password"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_email"
-        android:layout_margin="5dp"
-        android:inputType="textEmailAddress"
-        android:hint="Email"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_email"
+                android:layout_margin="5dp"
+                android:inputType="textEmailAddress"
+                android:hint="Email"/>
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="5dp"
-        android:onClick="saveSettings"
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="5dp"
+                android:onClick="saveSettings"
 
-        android:text="Register" />
+                android:text="Register" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

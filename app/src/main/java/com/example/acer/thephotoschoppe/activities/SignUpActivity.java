@@ -1,19 +1,22 @@
-package com.example.acer.thephotoschoppe;
+package com.example.acer.thephotoschoppe.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectView;
+import com.example.acer.thephotoschoppe.R;
+import com.example.acer.thephotoschoppe.database.DatabaseHandler;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -39,6 +42,18 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //Check exists database
+        File database = getApplicationContext().getDatabasePath(DatabaseHandler.getDBName());
+        if(false == database.exists()) {
+            mDBHelper.getReadableDatabase();
+            //Copy db
+            if(copyDatabase(this)) {
+                Toast.makeText(this, "Copy database succes", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
         txt_username=(EditText)findViewById(R.id.txt_username);
         txt_password=(EditText)findViewById(R.id.txt_password);
@@ -68,6 +83,27 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+
+    private boolean copyDatabase(Context context) {
+        try {
+
+            InputStream inputStream = context.getAssets().open(DatabaseHandler.getDBName());
+            String outFileName = DatabaseHandler.getDatabaseLocation() + DatabaseHandler.getDBName();
+            OutputStream outputStream = new FileOutputStream(outFileName);
+            byte[]buff = new byte[1024];
+            int length = 0;
+            while ((length = inputStream.read(buff)) > 0) {
+                outputStream.write(buff, 0, length);
+            }
+            outputStream.flush();
+            outputStream.close();
+            Log.w("MainActivity","DB copied");
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public void saveSettings(View view){
         Log.d(TAG,"on click save");

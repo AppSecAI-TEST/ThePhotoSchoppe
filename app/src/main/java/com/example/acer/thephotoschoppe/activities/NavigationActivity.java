@@ -1,4 +1,4 @@
-package com.example.acer.thephotoschoppe;
+package com.example.acer.thephotoschoppe.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import com.example.acer.thephotoschoppe.R;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
