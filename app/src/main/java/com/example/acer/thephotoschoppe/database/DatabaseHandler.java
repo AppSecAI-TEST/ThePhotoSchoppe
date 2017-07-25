@@ -20,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "photoshoppe.db";
     private static final String DATABASE_LOCATION = "/data/data/com.example.acer.thephotoschoppe/databases/";
 
-    private static final String TABLE_NAME = "photographer";
+
     private static final int DATABASE_VERSION=1;
 
     private  Context context;
@@ -53,10 +53,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             Photographer photographer=new Photographer();
             photographer.setFirstName(cursor.getString(0));
-            Log.d(TAG,""+cursor.getInt(0));
-
-
-
             photographer.setLastName(cursor.getString(1));
             photographer.setMobile(cursor.getString(2));
             photographer.setEmail(cursor.getString(3));
@@ -65,7 +61,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         closeDatabase();
-        return list.toArray(new Photographer[list.size()]);
+        return sortPhotographers(list.toArray(new Photographer[list.size()]));
+        //return list.toArray(new Photographer[list.size()]);
+    }
+
+    private Photographer[] sortPhotographers(Photographer[] photographers){
+
+        Photographer temp;
+        for (int i = 0; i < photographers.length; i++)
+        {
+            for (int j = i + 1; j < photographers.length; j++)
+            {
+                if (photographers[i].getFirstName().compareTo(photographers[j].getFirstName())>0)
+                {
+                    temp = photographers[i];
+                    photographers[i]=photographers[j];
+                    photographers[j] = temp;
+                }
+            }
+        }
+        return photographers;
     }
 
     public void openWritableDatabase(){
@@ -89,6 +104,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             database.close();
         }
     }
+
 
 
     public static String getDBName() {

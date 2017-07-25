@@ -1,41 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/first_name"
-        android:layout_margin="5dp"
-        android:textSize="30dp"
-        android:text="First Name"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/first_name"
+            android:layout_margin="5dp"
+            android:textSize="30dp"
+            android:text="First Name"/>
 
 
 
-    <TextView
-        android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/last_name"
+            android:layout_margin="5dp"
+            android:textSize="20dp"
+            android:text="Last Name"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/last_name"
-        android:layout_margin="5dp"
-        android:textSize="20dp"
-        android:text="Last Name"/>
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/icon_phone"
+            app:srcCompat="@drawable/ic_menu_phone" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mobile"
+            android:textSize="18dp"
+            android:layout_margin="5dp"
+            android:text="Mobile Number"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mobile"
-        android:textSize="15dp"
-        android:layout_margin="5dp"
-        android:text="Mobile Number"/>
 
-    <TextView
-        android:layout_width="match_parent"
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/email"
-        android:textSize="15dp"
-        android:layout_margin="5dp"
-        android:text="Email Address"/>
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/icon_email"
+            app:srcCompat="@drawable/ic_menu_email" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:textSize="18dp"
+            android:layout_margin="5dp"
+            android:text="Email Address"/>
+
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

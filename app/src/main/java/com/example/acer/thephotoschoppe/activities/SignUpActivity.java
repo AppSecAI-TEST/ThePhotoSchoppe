@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         boolean isLoggedIn=getInstance().getBoolean(getString(R.string.key_login),false);
         if(isRegister){
             if(isLoggedIn){
-                Intent intent =new Intent(SignUpActivity.this,NavigationActivity.class);
+                Intent intent =new Intent(SignUpActivity.this,MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -149,7 +149,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
             //start new activity and kill the current activity
-            Intent intent = new Intent(SignUpActivity.this, NavigationActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
