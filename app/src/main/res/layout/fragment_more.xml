@@ -42,14 +42,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textSize="20dp"
-                    android:text="Contact :"/>
+                    android:text="@string/prompt_mobile"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textSize="20dp"
                     android:id="@+id/tv_mobile"
-                    android:text="0238372"/>
+                    android:text="@string/company_contact_no"/>
             </LinearLayout>
 
             <LinearLayout
@@ -62,14 +62,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textSize="20dp"
-                    android:text="Email :"/>
+                    android:text="@string/prompt_mail"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textSize="20dp"
                     android:id="@+id/tv_email"
-                    android:text="photoschoppe@yahoo.com"/>
+                    android:text="@string/company_email"/>
 
             </LinearLayout>
 
@@ -86,12 +86,13 @@
 
 
                     android:textSize="20dp"
-                    android:text="View Location " />
+                    android:text="@string/prompt_location" />
                 <ImageButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
                     android:id="@+id/btn_locate"
+                    android:background="@color/colorGreen"
                     android:src="@drawable/ic_menu_locate"/>
             </LinearLayout>
 

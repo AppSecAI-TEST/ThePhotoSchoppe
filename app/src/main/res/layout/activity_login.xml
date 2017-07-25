@@ -31,12 +31,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:id="@+id/txt_username"
-                android:hint="Username"/>
+                android:hint="@string/prompt_username"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_password"
-                android:hint="Password"
+                android:hint="@string/prompt_password"
                 android:inputType="textPassword"
                 android:layout_margin="5dp"/>
 
@@ -47,7 +47,7 @@
                 android:layout_margin="5dp"
                 android:layout_gravity="end"
                 android:onClick="onClickLogin"
-                android:text="Login"/>
+                android:text="@string/action_login"/>
 
         </LinearLayout>
     </ScrollView>
