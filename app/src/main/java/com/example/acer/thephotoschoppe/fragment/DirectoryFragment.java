@@ -137,7 +137,7 @@ public class DirectoryFragment extends Fragment {
 
 
 /* Send it off to the Activity-Chooser */
-                        context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                     }
                 });
 
@@ -156,7 +156,7 @@ public class DirectoryFragment extends Fragment {
 
 
 /* Send it off to the Activity-Chooser */
-                        context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
                     }
                 });
