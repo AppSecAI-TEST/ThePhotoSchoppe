@@ -1,15 +1,19 @@
 package com.example.acer.thephotoschoppe.fragment;
 
+
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -25,7 +29,7 @@ import java.util.ArrayList;
 public class PortfolioFragment extends Fragment {
 
 
-    ArrayList<Photo> photosList;
+    static ArrayList<Photo> photosList;
     Context context;
     GridView gridView;
 
@@ -45,6 +49,7 @@ public class PortfolioFragment extends Fragment {
 
         context=getContext();
         photosList=new ArrayList<>();
+
         new GetContacts().execute();
         return rootView;
     }
@@ -137,12 +142,10 @@ Log.d(TAG,"exception");
                 @Override
                 public View getView(int i, View convertView, ViewGroup viewGroup) {
 
-
                     Photo photo=photosList.get(i);
                     View cellPhoto=null;
                     if(convertView==null){
                         cellPhoto= LayoutInflater.from(context).inflate(R.layout.grid_view_cell,null);
-
                     }
                     else {
                         cellPhoto=convertView;
@@ -163,12 +166,29 @@ Log.d(TAG,"exception");
                     }
                     Picasso.with(context)
                             .load(photo.getSrcUrl())
+                            .resize(150, 150)
+                            .centerCrop()
                             .into(image);
+
+
 
                     return cellPhoto;
                 }
             });
 
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent,
+                                        View v, int position, long id){
+//                     Send intent to SingleViewActivity
+                    Intent i = new Intent(context, SingleViewActivity.class);
+                    // Pass image index
+                    i.putExtra("id", position);
+                    i.putExtra("url",photosList.get(position).getSrcUrl());
+                    startActivity(i);
+
+
+                }
+            });
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
@@ -177,4 +197,9 @@ Log.d(TAG,"exception");
             ImageView image;
         }
     }
+
+    public static ArrayList<Photo> getPhotos(){
+        return photosList;
+    }
+
 }

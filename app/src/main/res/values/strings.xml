@@ -26,8 +26,6 @@
     <string name="action_login">Login</string>
 
 
-
-
     <!--company details-->
     <string name="company_email">photoschoppe@yahoo.com</string>
     <string name="company_contact_no">5581233</string>
@@ -36,7 +34,6 @@
     <string name="prompt_location">View Location</string>
     <string name="prompt_mobile">Contact :</string>
     <string name="prompt_mail">Email :</string>
-
 
 
     <!--strings use in create urls -->
@@ -53,8 +50,6 @@
     <string name="format">json</string>
     <string name="method_1">method=flickr.people.getPhotos</string>
     <string name="method_2">method=flickr.photos.getInfo</string>
-
-
 
 
 </resources>
