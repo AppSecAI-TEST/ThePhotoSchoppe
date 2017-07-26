@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.acer.thephotoschoppe.R;
 
 
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG ="LoginActivity" ;

@@ -24,47 +24,27 @@ public class FlickrManager {
 
     public FlickrManager(){
 
-
-
     }
 
 
     public String getImageListUrl(){
+
         String url=Constants.baseUrl+
-                "?"+Constants.methodPrompt+"="+Constants.method1+
-                "&"+Constants.apiKeyPrompt+"="+Constants.apiKey+
-                "&"+Constants.userIdPrompt+"="+Constants.userId+
+                "?"+Constants.userIdPrompt+"="+Constants.userId+
                 "&"+Constants.formatPrompt+"="+Constants.format+
                 "&"+Constants.nojsoncallbackPrompt+"="+Constants.nojsoncallback;
 
         return url;
 
-        //https://api.flickr.com/services/rest/
-        // ?method=flickr.people.getPhotos
-        // &api_key=d0d447e4568eb938fbf0db36b9e30fa9
-        // &user_id=26156338%40N07
+
+        //https://api.flickr.com/services/feeds/photos_public.gne
+        // ?id=26156338@N07
         // &format=json
         // &nojsoncallback=1
 
 
     }
 
-    public String getImageInfoUrl(String id){
-        String url=Constants.baseUrl+
-                "?"+Constants.methodPrompt+"="+Constants.method2+
-                "&"+Constants.apiKeyPrompt+"="+Constants.apiKey+
-                "&"+Constants.photoIdPrompt+"="+id+
-                "&"+Constants.formatPrompt+"="+Constants.format+
-                "&"+Constants.nojsoncallbackPrompt+"="+Constants.nojsoncallback;
-        return  url;
-        //https://api.flickr.com/services/rest/
-        // ?method=flickr.photos.getInfo
-        // &api_key=d0d447e4568eb938fbf0db36b9e30fa9
-        // &photo_id=35361371863
-        // &format=json
-        // &nojsoncallback=1
-
-    }
 
     public String makeServiceCall(String reqUrl) {
         String response = null;
@@ -108,9 +88,6 @@ public class FlickrManager {
         }
         return sb.toString();
     }
-
-
-
 
 
 }

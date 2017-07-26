@@ -8,64 +8,43 @@ import android.os.Message;
 
 public class Photo {
 
-    private String id;
-    private String ownerUsername;
+
     private String title;
-    private String date;
-    private String url;
-    private Message msg;
+    private String takenDate;
+    private String publishedDate;
+    private String webUrl;
+    private String srcUrl;
 
-    public Photo(String id,String title){
-        this.id=id;
+
+    public Photo(String title,String webUrl,String srcUrl,String takenDate,String publishedDate){
+
         this.title=title;
+        this.webUrl=webUrl;
+        this.srcUrl=srcUrl;
+        this.publishedDate=publishedDate;
+        this.takenDate=takenDate;
 
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public void setOwnerUsername(String ownerUsername) {
-        this.ownerUsername = ownerUsername;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setMsg(Message msg) {
-        this.msg = msg;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getOwnerUsername() {
-        return ownerUsername;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getDate() {
-        return date;
+    public String getTakenDate() {
+        return takenDate;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPublishedDate() {
+        return publishedDate;
     }
 
-    public Message getMsg() {
-        return msg;
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public String getSrcUrl() {
+        return srcUrl;
     }
 }
