@@ -189,6 +189,7 @@ Log.d(TAG,"exception");
 
                 }
             });
+            gridView.setDrawSelectorOnTop(true);
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }

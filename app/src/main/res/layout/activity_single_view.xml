@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
 
     tools:context="com.example.acer.thephotoschoppe.fragment.SingleViewActivity">
 
-    <android.support.v4.view.ViewPager
-        android:layout_height="match_parent"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/viewPager"
-        />
-</RelativeLayout>
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            android:background="#000000"
+            android:scaleType="fitCenter"/>
+    </RelativeLayout>
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/viewPager"-->
+        <!--/>-->
+</LinearLayout>

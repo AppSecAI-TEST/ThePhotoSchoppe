@@ -24,9 +24,11 @@ public class CustomSwip extends PagerAdapter {
     private Context ctx;
     private LayoutInflater layoutInflater;
 
-    public CustomSwip(Context c) {
+    public CustomSwip(Context c,int position) {
         ctx=c;
         photos=PortfolioFragment.getPhotos();
+//       instantiateItem((ViewGroup) ctx,position);
+
     }
 
     @Override
