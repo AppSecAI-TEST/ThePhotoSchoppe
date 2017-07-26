@@ -25,5 +25,11 @@ class Constants {
     static String formatPrompt = "format";
     static String nojsoncallbackPrompt = "nojsoncallback";
 
+    //https://api.flickr.com/services/rest/
+    // ?method=flickr.people.getPhotos
+    // &api_key=e092219e549a3ef169b692521e692cb9
+    // &user_id=87044997%40N08
+    // &format=json
+    // &nojsoncallback=1
 
 }

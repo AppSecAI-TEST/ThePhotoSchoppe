@@ -1,7 +1,6 @@
 package com.example.acer.thephotoschoppe.flickr;
 
-import android.content.Context;
-import android.content.res.Resources;
+
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -109,6 +108,8 @@ public class FlickrManager {
         }
         return sb.toString();
     }
+
+
 
 
 

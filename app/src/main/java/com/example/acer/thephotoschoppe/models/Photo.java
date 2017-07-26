@@ -1,5 +1,7 @@
 package com.example.acer.thephotoschoppe.models;
 
+import android.os.Message;
+
 /**
  * Created by prabodhaharankahadeniya on 7/26/17.
  */
@@ -11,6 +13,7 @@ public class Photo {
     private String title;
     private String date;
     private String url;
+    private Message msg;
 
     public Photo(String id,String title){
         this.id=id;
@@ -38,6 +41,10 @@ public class Photo {
         this.url = url;
     }
 
+    public void setMsg(Message msg) {
+        this.msg = msg;
+    }
+
     public String getId() {
         return id;
     }
@@ -56,5 +63,9 @@ public class Photo {
 
     public String getUrl() {
         return url;
+    }
+
+    public Message getMsg() {
+        return msg;
     }
 }
