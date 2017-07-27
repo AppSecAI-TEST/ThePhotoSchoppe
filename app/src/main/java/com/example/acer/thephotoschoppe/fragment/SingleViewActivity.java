@@ -17,24 +17,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.acer.thephotoschoppe.R;
+import com.example.acer.thephotoschoppe.models.Photo;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class SingleViewActivity extends AppCompatActivity {
 
-//    ViewPager viewPager;
-//    CustomSwip  customSwip;
+
 
     private ImageView imageView;
     private int position;
+    ArrayList<Photo> photos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_view);
-//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Photo");
 
+        photos=PortfolioFragment.getPhotos();
 
         // Get intent data
         Intent i = getIntent();
@@ -43,14 +47,47 @@ public class SingleViewActivity extends AppCompatActivity {
         position = i.getExtras().getInt("id");
         String url=i.getExtras().getString("url");
 
+        imageView = (ImageView) findViewById(R.id.imageView);
 
-
-//
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//
         Picasso.with(this)
                 .load(url)
                 .into(imageView);
+
+        imageView.setOnTouchListener(new OnSwipeTouchListener(this){
+
+            public void onSwipeTop() {
+//                    Toast.makeText(SingleViewActivity.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                //Toast.makeText(SingleViewActivity.this, "right", Toast.LENGTH_SHORT).show();
+                if(position>0){
+                    position=position-1;
+                    Picasso.with(getInstance())
+                            .load(photos.get(position).getSrcUrl())
+                            .into(imageView);
+                }
+
+
+
+            }
+            public void onSwipeLeft() {
+                //Toast.makeText(SingleViewActivity.this, "left", Toast.LENGTH_SHORT).show();
+
+                if(position+1<photos.size()){
+                    position=position+1;
+                    Picasso.with(getInstance())
+                            .load(photos.get(position).getSrcUrl())
+                            .into(imageView);
+                }
+            }
+            public void onSwipeBottom() {
+//                Toast.makeText(SingleViewActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +104,7 @@ public class SingleViewActivity extends AppCompatActivity {
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-//                final EditText userInput = (EditText) promptsView
-//                        .findViewById(R.id.editTextDialogUserInput);
+
 
                 ImageButton attachEmail=(ImageButton)promptsView.findViewById(R.id.attach_email_btn);
                 attachEmail.setOnClickListener(new View.OnClickListener() {
@@ -147,5 +183,9 @@ public class SingleViewActivity extends AppCompatActivity {
 //        customSwip=new CustomSwip(this,position);
 //        viewPager.setAdapter(customSwip);
 
+    }
+
+    private SingleViewActivity getInstance(){
+        return this;
     }
 }
