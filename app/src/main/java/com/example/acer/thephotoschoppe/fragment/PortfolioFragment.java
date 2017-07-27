@@ -113,7 +113,7 @@ public class PortfolioFragment extends Fragment {
                 }
             }
             else {
-Log.d(TAG,"exception");
+                Log.d(TAG,"exception");
             }
 
             return null;

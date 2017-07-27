@@ -26,8 +26,6 @@ import java.util.ArrayList;
 
 public class SingleViewActivity extends AppCompatActivity {
 
-
-
     private ImageView imageView;
     private int position;
     ArrayList<Photo> photos;
@@ -85,7 +83,6 @@ public class SingleViewActivity extends AppCompatActivity {
             }
 
         });
-
 
 
 
@@ -179,9 +176,6 @@ public class SingleViewActivity extends AppCompatActivity {
 
             }
         });
-//        viewPager=(ViewPager)findViewById(R.id.viewPager);
-//        customSwip=new CustomSwip(this,position);
-//        viewPager.setAdapter(customSwip);
 
     }
 

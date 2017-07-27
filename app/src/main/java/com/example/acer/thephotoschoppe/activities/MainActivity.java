@@ -81,20 +81,20 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-            SharedPreferences.Editor editor=getInstance().edit();
-            editor.putBoolean(getString(R.string.key_login),false);
-            editor.putBoolean(getString(R.string.key_registered),true);
-            //commit changes to make in the editor
-            editor.commit();
-
-            //finish the current activity and start new activity
-            Intent intent =new Intent(MainActivity.this,LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-            return true;
-        }
+//        if (id == R.id.action_logout) {
+//            SharedPreferences.Editor editor=getInstance().edit();
+//            editor.putBoolean(getString(R.string.key_login),false);
+//            editor.putBoolean(getString(R.string.key_registered),true);
+//            //commit changes to make in the editor
+//            editor.commit();
+//
+//            //finish the current activity and start new activity
+//            Intent intent =new Intent(MainActivity.this,LoginActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//            finish();
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -126,6 +126,19 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager=getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.main_layout,moreFragment).commit();
             this.setTitle("Contact Information");
+
+        }else if (id == R.id.nav_logout) {
+            SharedPreferences.Editor editor=getInstance().edit();
+            editor.putBoolean(getString(R.string.key_login),false);
+            editor.putBoolean(getString(R.string.key_registered),true);
+            //commit changes to make in the editor
+            editor.commit();
+
+            //finish the current activity and start new activity
+            Intent intent =new Intent(MainActivity.this,LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
 
         }
 
