@@ -43,18 +43,17 @@ public class MoreFragment extends Fragment {
         emailTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /* Create the Intent */
+                //Create the Intent
                 final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
-/* Fill it with Data */
+                //Fill it with Data
                 emailIntent.setType("plain/text");
                 emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailTV.getText().toString()});
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Inquiry for the Photo Schoppe");
 
 
-/* Send it off to the Activity-Chooser */
+                // Send it off to the Activity-Chooser
                 startActivity(emailIntent);
-//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
 
             }
@@ -75,8 +74,6 @@ public class MoreFragment extends Fragment {
             public void onClick(View view) {
 
                 Uri location = Uri.parse("geo:0,0?q=9600+Great+Hills+Trl,+Austin,+Tx+78759,+United+States");
-//                Uri location = Uri.parse("geo:30.395414,-97.753739?z=14");
-
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
 
                 startActivity(mapIntent);

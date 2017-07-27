@@ -75,26 +75,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_logout) {
-//            SharedPreferences.Editor editor=getInstance().edit();
-//            editor.putBoolean(getString(R.string.key_login),false);
-//            editor.putBoolean(getString(R.string.key_registered),true);
-//            //commit changes to make in the editor
-//            editor.commit();
-//
-//            //finish the current activity and start new activity
-//            Intent intent =new Intent(MainActivity.this,LoginActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(intent);
-//            finish();
-//            return true;
-//        }
 
         return super.onOptionsItemSelected(item);
     }

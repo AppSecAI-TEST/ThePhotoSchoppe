@@ -3,30 +3,26 @@ package com.example.acer.thephotoschoppe.fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.acer.thephotoschoppe.R;
+import com.example.acer.thephotoschoppe.listener.OnSwipeTouchListener;
 import com.example.acer.thephotoschoppe.models.Photo;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class SingleViewActivity extends AppCompatActivity {
 
     private ImageView imageView;
+    private TextView titleTV;
     private int position;
     ArrayList<Photo> photos;
 
@@ -47,6 +43,8 @@ public class SingleViewActivity extends AppCompatActivity {
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
+        titleTV = (TextView) findViewById(R.id.title);
+        titleTV.setText((position+1)+" of "+photos.size());
         Picasso.with(this)
                 .load(url)
                 .into(imageView);
@@ -60,6 +58,7 @@ public class SingleViewActivity extends AppCompatActivity {
                 //Toast.makeText(SingleViewActivity.this, "right", Toast.LENGTH_SHORT).show();
                 if(position>0){
                     position=position-1;
+                    titleTV.setText((position+1)+" of "+photos.size());
                     Picasso.with(getInstance())
                             .load(photos.get(position).getSrcUrl())
                             .into(imageView);
@@ -73,6 +72,7 @@ public class SingleViewActivity extends AppCompatActivity {
 
                 if(position+1<photos.size()){
                     position=position+1;
+                    titleTV.setText((position+1)+" of "+photos.size());
                     Picasso.with(getInstance())
                             .load(photos.get(position).getSrcUrl())
                             .into(imageView);

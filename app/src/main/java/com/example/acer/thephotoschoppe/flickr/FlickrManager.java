@@ -37,10 +37,7 @@ public class FlickrManager {
         return url;
 
 
-        //https://api.flickr.com/services/feeds/photos_public.gne
-        // ?id=26156338@N07
-        // &format=json
-        // &nojsoncallback=1
+        //https://api.flickr.com/services/feeds/photos_public.gne?id=26156338@N07&format=json&nojsoncallback=1
 
 
     }

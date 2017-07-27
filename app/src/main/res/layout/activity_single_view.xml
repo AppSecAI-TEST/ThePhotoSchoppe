@@ -4,22 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBlack"
 
     tools:context="com.example.acer.thephotoschoppe.fragment.SingleViewActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/title"
+            android:textSize="25dp"
+            android:layout_margin="20dp"
+            android:textColor="@color/colorWhite"
+            android:text="title"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                        <ImageButton
+
+                            android:layout_width="40dp"
+                            android:id="@+id/explore_web_btn"
+                            android:src="@mipmap/ic_flikcr"
+                            android:background="@color/colorGreen"
+                            android:layout_height="40dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textSize="15dp"
+                            android:textColor="@color/colorWhite"
+                            android:id="@+id/explore_web_tv"
+
+                            android:text="View in Flikcr"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    android:layout_margin="5dp">
+                        <ImageButton
+                            android:layout_width="40dp"
+                            android:id="@+id/attach_email_btn"
+                            android:src="@mipmap/ic_gmail"
+                            android:background="@color/colorGreen"
+                            android:layout_height="40dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textSize="15dp"
+                            android:textColor="@color/colorWhite"
+                            android:id="@+id/attach_email_tv"
+                            android:text="Attach with Email"/>
+
+                </LinearLayout>
+        </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView"
             android:background="#000000"
             android:scaleType="fitCenter"/>
-    </RelativeLayout>
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:id="@+id/viewPager"-->
-        <!--/>-->
+
+
 </LinearLayout>

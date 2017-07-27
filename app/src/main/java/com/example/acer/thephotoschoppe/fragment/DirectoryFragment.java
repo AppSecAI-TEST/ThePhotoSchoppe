@@ -37,10 +37,10 @@ public class DirectoryFragment extends Fragment {
 
     private Photographer[] photographers;
     ListView listView;
+
     public DirectoryFragment() {
         // Required empty public constructor
-//        context=getActivity().getApplicationContext();
-//        Log.d(TAG,context+"");
+
     }
 
 
@@ -127,16 +127,16 @@ public class DirectoryFragment extends Fragment {
                 emailTV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                     /* Create the Intent */
+                        //Create the Intent
                         final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
-/* Fill it with Data */
+                        //Fill it with Data
                         emailIntent.setType("plain/text");
                         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailTV.getText().toString()});
                         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hello, "+firstNameTV.getText());
 
 
-/* Send it off to the Activity-Chooser */
+                        //Send it off to the Activity-Chooser
                         startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                     }
                 });
@@ -146,16 +146,16 @@ public class DirectoryFragment extends Fragment {
                 emailIV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       /* Create the Intent */
+                       //Create the Intent
                         final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
-/* Fill it with Data */
+                        //Fill it with Data
                         emailIntent.setType("plain/text");
                         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailTV.getText().toString()});
                         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hello, "+firstNameTV.getText());
 
 
-/* Send it off to the Activity-Chooser */
+                        // Send it off to the Activity-Chooser
                         startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
                     }
@@ -201,9 +201,6 @@ public class DirectoryFragment extends Fragment {
         ImageView iconEmail;
 
     }
-
-
-
 
 
 

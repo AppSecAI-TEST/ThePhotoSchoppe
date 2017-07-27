@@ -91,7 +91,6 @@ public class PortfolioFragment extends Fragment {
                     for (int i=0;i<breakpoint;i++){
                         JSONObject c=photos.getJSONObject(i);
 
-
                         String title=c.getString("title");
                         String webUrl=c.getString("link");
                         String dateTaken=c.getString("date_taken");
@@ -167,7 +166,7 @@ public class PortfolioFragment extends Fragment {
                     }
                     Picasso.with(context)
                             .load(photo.getSrcUrl())
-                            .resize(150, 150)
+                            .resize(150,150)
                             .centerCrop()
                             .into(image);
 
