@@ -36,20 +36,17 @@
     <string name="prompt_mail">Email :</string>
 
 
-    <!--strings use in create urls -->
-    <string name="prompt_api_key">api_key</string>
-    <string name="prompt_method">method</string>
-    <string name="prompt_format">format</string>
-    <string name="prompt_nojsoncallback">nojsoncallback</string>
-    <string name="prompt_user_id">user_id</string>
-    <string name="prompt_photo_id">photo_id</string>
+   <!--validation strings-->
+    <string name="username_required">* Username field required.</string>
+    <string name="password_required">* Password field required.</string>
+    <string name="conf_password_required">* Confirm password field required.</string>
+    <string name="email_required">* Email field required.</string>
+    <string name="password_not_match">Password confirmation did not matched.</string>
+    <string name="incorrect_username">Invalid username or password.</string>
+    <string name="incorrect_password">Invalid password.</string>
 
-    <string name="base_url">https://api.flickr.com/services/rest/</string>
-    <string name="api_key">d0d447e4568eb938fbf0db36b9e30fa9</string>
-    <string name="user_id">26156338%40N07</string>
-    <string name="format">json</string>
-    <string name="method_1">method=flickr.people.getPhotos</string>
-    <string name="method_2">method=flickr.photos.getInfo</string>
+
+
 
 
 </resources>

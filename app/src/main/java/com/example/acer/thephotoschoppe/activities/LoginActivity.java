@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.acer.thephotoschoppe.R;
@@ -19,6 +20,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText txt_username;
     private EditText txt_password;
+
+    private TextView err_username;
+    private TextView err_password;
 
 
     SharedPreferences preferences;
@@ -37,49 +41,83 @@ public class LoginActivity extends AppCompatActivity {
         txt_username=(EditText)findViewById(R.id.txt_username);
         txt_password=(EditText)findViewById(R.id.txt_password);
 
+        err_username=(TextView) findViewById(R.id.username_err);
+        err_password=(TextView)findViewById(R.id.password_err);
+        err_username.setVisibility(View.INVISIBLE);
+        err_password.setVisibility(View.INVISIBLE);
+
 
     }
 
     public void onClickLogin(View view){
-        if(txt_password.getText().toString().equals("") || txt_username.getText().toString().equals("")){
-            Toast.makeText(LoginActivity.this,"Please fill the form properly",Toast.LENGTH_LONG).show();
+        err_username.setVisibility(View.INVISIBLE);
+        err_password.setVisibility(View.INVISIBLE);
+        boolean flag=false;
+        if(txt_password.getText().toString().equals("")){
+            err_password.setVisibility(View.VISIBLE);
+            err_password.setText(getString(R.string.username_required));
+          flag=true;
+        }
+        if(txt_username.getText().toString().equals("")){
+            err_username.setVisibility(View.VISIBLE);
+            err_username.setText(getString(R.string.username_required));
+            flag=true;
 
+
+
+        }
+        if(flag){
+            Toast.makeText(LoginActivity.this,"Please fill the form properly",Toast.LENGTH_LONG).show();
             //clear data
             txt_username.setText("");
             txt_password.setText("");
-
         }
         else {
 
             String storedUsername=getInstance().getString(getString(R.string.key_username),null);
             String storedPassword=getInstance().getString(getString(R.string.key_password),null);
-            if(storedPassword.equals(txt_password.getText().toString()) && storedUsername.equals(txt_username.getText().toString())){
-                SharedPreferences.Editor editor=getInstance().edit();
-                editor.putBoolean(getString(R.string.key_login),true);
-                editor.putBoolean(getString(R.string.key_registered),true);
-                editor.commit();
+            if(storedUsername.equals(txt_username.getText().toString())){
+                if(storedPassword.equals(txt_password.getText().toString())){
+                    SharedPreferences.Editor editor=getInstance().edit();
+                    editor.putBoolean(getString(R.string.key_login),true);
+                    editor.putBoolean(getString(R.string.key_registered),true);
+                    editor.commit();
 
-                //success message
-                Toast.makeText(LoginActivity.this,"Login successful",Toast.LENGTH_LONG).show();
+                    //success message
+                    Toast.makeText(LoginActivity.this,"Login successful",Toast.LENGTH_LONG).show();
 
 
-                //start new activity and kill the current activity
-                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+                    //start new activity and kill the current activity
+                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
 
-            }
-            else {
+                }
+                else {
+                    //error message
+                    err_password.setVisibility(View.VISIBLE);
+                    err_password.setText(getString(R.string.incorrect_password));
+                    Toast.makeText(LoginActivity.this,"Login failed",Toast.LENGTH_LONG).show();
+
+                    //clear data
+
+                    txt_password.setText("");
+
+
+                }
+            }else {
                 //error message
+                err_password.setVisibility(View.VISIBLE);
+                err_password.setText(getString(R.string.incorrect_username));
                 Toast.makeText(LoginActivity.this,"Login failed",Toast.LENGTH_LONG).show();
 
                 //clear data
                 txt_username.setText("");
                 txt_password.setText("");
 
-
             }
+
         }
 
     }

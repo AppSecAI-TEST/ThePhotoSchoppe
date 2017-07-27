@@ -33,6 +33,14 @@
                 android:inputType="text"
                 android:hint="@string/prompt_username" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/username_err"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorDarkRed"
+                android:visibility="invisible"/>
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +48,13 @@
                 android:layout_margin="5dp"
                 android:inputType="textPassword"
                 android:hint="@string/prompt_password"/>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/password_err"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorDarkRed"
+                android:visibility="invisible"/>
 
 
             <EditText
@@ -50,6 +64,13 @@
                 android:layout_margin="5dp"
                 android:inputType="textPassword"
                 android:hint="@string/prompt_confirm_password"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirm_password_err"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorDarkRed"
+                android:visibility="invisible"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -58,6 +79,13 @@
                 android:layout_margin="5dp"
                 android:inputType="textEmailAddress"
                 android:hint="@string/prompt_email"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_err"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorDarkRed"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/btn_register"

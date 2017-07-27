@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.acer.thephotoschoppe.R;
@@ -28,6 +29,11 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText txt_password;
     private EditText txt_confirm_password;
     private EditText txt_email;
+
+    private TextView err_username;
+    private TextView err_password;
+    private TextView err_confirm_password;
+    private TextView err_email;
 
     SharedPreferences preferences;
     private SharedPreferences getInstance(){
@@ -56,9 +62,9 @@ public class SignUpActivity extends AppCompatActivity {
             getDBHandler().getReadableDatabase();
             //Copy db
             if(copyDatabase(this)) {
-                Toast.makeText(this, "Copy database success", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Copy database success", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -67,6 +73,17 @@ public class SignUpActivity extends AppCompatActivity {
         txt_password=(EditText)findViewById(R.id.txt_password);
         txt_confirm_password=(EditText)findViewById(R.id.txt_confirm_password);
         txt_email=(EditText)findViewById(R.id.txt_email);
+
+
+        err_username=(TextView) findViewById(R.id.username_err);
+        err_password=(TextView)findViewById(R.id.password_err);
+        err_confirm_password=(TextView)findViewById(R.id.confirm_password_err);
+        err_email=(TextView)findViewById(R.id.email_err);
+
+        err_username.setVisibility(View.INVISIBLE);
+        err_password.setVisibility(View.INVISIBLE);
+        err_confirm_password.setVisibility(View.INVISIBLE);
+        err_email.setVisibility(View.INVISIBLE);
 
 
         boolean isRegister=getInstance().getBoolean(getString(R.string.key_registered),false);
@@ -116,25 +133,48 @@ public class SignUpActivity extends AppCompatActivity {
     public void saveSettings(View view){
         Log.d(TAG,"on click save");
 
+        err_username.setVisibility(View.INVISIBLE);
+        err_password.setVisibility(View.INVISIBLE);
+        err_confirm_password.setVisibility(View.INVISIBLE);
+        err_email.setVisibility(View.INVISIBLE);
+
         //initialize editor to edit
         SharedPreferences.Editor editor=getInstance().edit();
         //add data to the editor
         Log.d(TAG,txt_confirm_password.getText()+"");
-        if(txt_username.getText().toString().equals("") ||
-                txt_email.getText().toString().equals("") ||
-                txt_password.getText().toString().equals("") ||
-                txt_confirm_password.getText().toString().equals("")){
-            Toast.makeText(SignUpActivity.this,"Please make sure to fill the form properly",Toast.LENGTH_LONG).show();
+        boolean flag=false;
 
+        if(txt_username.getText().toString().equals("")){
+            err_username.setVisibility(View.VISIBLE);
+            err_username.setText(getString(R.string.username_required));
+            flag=true;
+        }
+        if(txt_email.getText().toString().equals("")){
+            err_email.setVisibility(View.VISIBLE);
+            err_email.setText(getString(R.string.email_required));
+            flag=true;
+        }
+        if(txt_password.getText().toString().equals("")){
+            err_password.setVisibility(View.VISIBLE);
+            err_password.setText(getString(R.string.conf_password_required));
+            flag=true;
+        }
+        if(txt_confirm_password.getText().toString().equals("")){
+            err_confirm_password.setVisibility(View.VISIBLE);
+            err_confirm_password.setText(getString(R.string.conf_password_required));
+            flag=true;
+        }
+        if(flag){
+            Toast.makeText(SignUpActivity.this,"Please make sure to fill the form properly",Toast.LENGTH_LONG).show();
             return;
         }else if(!txt_confirm_password.getText().toString().equals(txt_password.getText().toString())){
             Toast.makeText(SignUpActivity.this,"Password confirmation did not matched",Toast.LENGTH_LONG).show();
+            err_confirm_password.setText(getString(R.string.password_not_match));
+            err_confirm_password.setVisibility(View.VISIBLE);
 //            txt_confirm_password.
             return;
         }
         else {
-
-
             editor.putBoolean(getString(R.string.key_registered), true);
             editor.putString(getString(R.string.key_username), txt_username.getText().toString());
             editor.putString(getString(R.string.key_password), txt_password.getText().toString());
@@ -145,8 +185,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             //success message
             Toast.makeText(SignUpActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
-
-
 
             //start new activity and kill the current activity
             Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
