@@ -129,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:id="@+id/btn_locate"
+                    android:background="@color/colorWhite"
                     android:src="@mipmap/ic_locate_me"/>
             </LinearLayout>
 
