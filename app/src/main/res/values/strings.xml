@@ -29,7 +29,7 @@
 
     <!--company details-->
     <string name="company_email"><b><u>photoschoppe@yahoo.com</u></b></string>
-    <string name="company_contact_no"><b><u>5581233</u></b></string>
+    <string name="company_contact_no"><u>5581233</u></string>
     <string name="company_address_line_1"><b>9600 Great Hills Trl,</b></string>
     <string name="company_address_line_2"><b>Austin,</b></string>
     <string name="company_address_line_3"><b>TX  78759,</b></string>

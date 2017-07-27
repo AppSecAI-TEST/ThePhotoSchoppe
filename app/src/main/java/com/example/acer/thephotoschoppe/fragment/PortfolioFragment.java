@@ -17,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.example.acer.thephotoschoppe.R;
 import com.example.acer.thephotoschoppe.flickr.FlickrManager;
 import com.example.acer.thephotoschoppe.models.Photo;
@@ -24,6 +26,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class PortfolioFragment extends Fragment {
@@ -154,15 +158,19 @@ public class PortfolioFragment extends Fragment {
                     PlaceHolder ph=(PlaceHolder)cellPhoto.getTag();
 
                     ImageView image;
+                    TextView date;
 
                     if(ph==null){
                         image=(ImageView)cellPhoto.findViewById(R.id.image_view);
+                        date=(TextView)cellPhoto.findViewById(R.id.date_tv);
                         ph=new PlaceHolder();
                         ph.image=image;
+                        ph.date=date;
                         cellPhoto.setTag(ph);
                     }
                     else {
                         image=ph.image;
+                        date=ph.date;
                     }
                     Picasso.with(context)
                             .load(photo.getSrcUrl())
@@ -170,7 +178,7 @@ public class PortfolioFragment extends Fragment {
                             .centerCrop()
                             .into(image);
 
-
+                    date.setText(photo.getPublishedDate());
 
                     return cellPhoto;
                 }
@@ -196,6 +204,7 @@ public class PortfolioFragment extends Fragment {
         }
         private class PlaceHolder{
             ImageView image;
+            TextView date;
         }
     }
 

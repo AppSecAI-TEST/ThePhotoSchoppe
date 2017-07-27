@@ -17,12 +17,19 @@ import com.example.acer.thephotoschoppe.listener.OnSwipeTouchListener;
 import com.example.acer.thephotoschoppe.models.Photo;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class SingleViewActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView titleTV;
+    private TextView exploreWebTV;
+    private ImageView exploreWebBtn;
+    private TextView attachPhotoTV;
+    private ImageView attachPhotoBtn;
+
     private int position;
     ArrayList<Photo> photos;
 
@@ -84,96 +91,52 @@ public class SingleViewActivity extends AppCompatActivity {
 
         });
 
-
-
-        imageView.setOnClickListener(new View.OnClickListener() {
+        exploreWebTV=(TextView)findViewById(R.id.explore_web_tv);
+        exploreWebTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-                LayoutInflater li = LayoutInflater.from(SingleViewActivity.this);
-                View promptsView = li.inflate(R.layout.prompt, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        SingleViewActivity.this);
-
-                // set prompts.xml to alertdialog builder
-                alertDialogBuilder.setView(promptsView);
-
-
-
-                ImageButton attachEmail=(ImageButton)promptsView.findViewById(R.id.attach_email_btn);
-                attachEmail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
-                        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                        emailIntent.setType("plain/text");
+                String url = PortfolioFragment.getPhotos().get(position).getWebUrl();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        exploreWebBtn=(ImageView) findViewById(R.id.explore_web_btn);
+        exploreWebBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = PortfolioFragment.getPhotos().get(position).getWebUrl();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        attachPhotoTV=(TextView)findViewById(R.id.attach_email_tv);
+        attachPhotoTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
 //                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
 //                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
 //                        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
-                        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
-                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                    }
-                });
-
-                ImageButton exploreWeb=(ImageButton)promptsView.findViewById(R.id.explore_web_btn);
-                exploreWeb.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String url = PortfolioFragment.getPhotos().get(position).getWebUrl();
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
-                    }
-                });
-
-                TextView attachEmailTV=(TextView) promptsView.findViewById(R.id.attach_email_tv);
-                attachEmailTV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
-                        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                        emailIntent.setType("application/image");
+                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
+                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            }
+        });
+        attachPhotoBtn=(ImageView) findViewById(R.id.attach_email_btn);
+        attachPhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
 //                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
 //                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
 //                        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
-                        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
-                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-                    }
-                });
-
-                TextView exploreWebTV=(TextView)promptsView.findViewById(R.id.explore_web_tv);
-                exploreWebTV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String url = PortfolioFragment.getPhotos().get(position).getWebUrl();
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
-                    }
-                });
-                // set dialog message
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-
-
+                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
+                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             }
         });
 

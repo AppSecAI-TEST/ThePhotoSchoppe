@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,7 +125,11 @@ public class DirectoryFragment extends Fragment {
                 firstNameTV.setText(photographer.getFirstName());
                 lastNameTV.setText(photographer.getLastName());
 
-                emailTV.setText(photographer.getEmail());
+//                emailTV.setText(photographer.getEmail());
+                String email=new String(photographer.getEmail());
+                SpannableString content = new SpannableString(email);
+                content.setSpan(new UnderlineSpan(), 0, email.length(), 0);
+                emailTV.setText(content);
                 emailTV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -162,7 +168,12 @@ public class DirectoryFragment extends Fragment {
                 });
 
 
-                mobileTV.setText(photographer.getMobile());
+//                mobileTV.setText(photographer.getMobile());
+
+                String mobile=new String(photographer.getMobile());
+                SpannableString content_mobile = new SpannableString(mobile);
+                content_mobile.setSpan(new UnderlineSpan(), 0, mobile.length(), 0);
+                mobileTV.setText(content_mobile);
                 mobileTV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

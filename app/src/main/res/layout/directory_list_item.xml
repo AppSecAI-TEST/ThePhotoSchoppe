@@ -15,6 +15,7 @@
             android:id="@+id/first_name"
             android:layout_margin="5dp"
             android:textSize="30dp"
+            android:textColor="@color/colorBlack"
             android:text="First Name"/>
 
 
@@ -42,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mobile"
+            android:textColor="@color/colorPrimary"
             android:textSize="18dp"
             android:layout_margin="5dp"
             android:text="Mobile Number"/>
@@ -64,6 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/email"
+            android:textColor="@color/colorPrimary"
+
             android:textSize="18dp"
             android:layout_margin="5dp"
             android:text="Email Address"/>

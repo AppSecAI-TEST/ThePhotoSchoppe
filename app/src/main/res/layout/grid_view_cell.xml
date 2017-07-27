@@ -9,4 +9,20 @@
         android:layout_height="150dp"
         android:background="@color/colorBlack"
         android:id="@+id/image_view"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorBlack"
+        android:text="Published at :"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_tv"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="date"/>
 </LinearLayout>
