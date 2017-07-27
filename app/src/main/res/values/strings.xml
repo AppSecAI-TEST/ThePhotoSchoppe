@@ -11,6 +11,7 @@
     <!--strings of keys in shared preferences-->
     <string name="shared_preferences">com.irononetech.thephotoschoppe.settings</string>
     <string name="key_registered">registered</string>
+    <string name="key_request_sign_up">request_sign_up</string>
     <string name="key_username">username</string>
     <string name="key_password">password</string>
     <string name="key_email">email</string>
@@ -27,8 +28,13 @@
 
 
     <!--company details-->
-    <string name="company_email">photoschoppe@yahoo.com</string>
-    <string name="company_contact_no">5581233</string>
+    <string name="company_email"><b><u>photoschoppe@yahoo.com</u></b></string>
+    <string name="company_contact_no"><b><u>5581233</u></b></string>
+    <string name="company_address_line_1"><b>9600 Great Hills Trl,</b></string>
+    <string name="company_address_line_2"><b>Austin,</b></string>
+    <string name="company_address_line_3"><b>TX  78759,</b></string>
+    <string name="company_address_line_4"><b>United States.</b></string>
+
 
     <!--strings of fragments-->
     <string name="prompt_location">View Location</string>
@@ -45,6 +51,7 @@
     <string name="incorrect_username">Invalid username or password.</string>
     <string name="incorrect_password">Invalid password.</string>
 
+    <string name="sign_up_first"><b><u>Sign Up First</u></b></string>
 
 
 

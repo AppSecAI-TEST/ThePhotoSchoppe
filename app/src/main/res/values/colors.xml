@@ -5,11 +5,14 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorGreen">#228B22</color>
     <color name="color">#222B22</color>
+    <color name="colorBlack">#000000</color>
+
     <color name="colorRed">#FF0000</color>
     <color name="colorMagenta">#800000</color>
     <color name="colorDarkRed">#8B0000</color>
     <color name="colorTomato">#FF6347</color>
 
     <color name="colorWhite">#FFFFFF</color>
+
 
 </resources>

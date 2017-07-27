@@ -122,4 +122,18 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void signUpFirst(View view){
+        SharedPreferences.Editor editor=getInstance().edit();
+        editor.putBoolean(getString(R.string.key_request_sign_up),true);
+
+        editor.commit();
+        //start new activity and kill the current activity
+        Intent intent=new Intent(LoginActivity.this,SignUpActivity.class);
+        intent.putExtra("flag",true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+    }
+
 }

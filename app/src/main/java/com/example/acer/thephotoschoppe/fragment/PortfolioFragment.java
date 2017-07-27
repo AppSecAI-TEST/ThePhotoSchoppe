@@ -78,7 +78,7 @@ public class PortfolioFragment extends Fragment {
             if(jsonStr!=null){
                 try {
                     JSONObject jsonObject=new JSONObject(jsonStr);
-                   // JSONObject items=jsonObject.getJSONObject("photos");
+
                     JSONArray photos=jsonObject.getJSONArray("items");
                     int breakpoint;
                     if(photos.length()>10){
@@ -96,6 +96,7 @@ public class PortfolioFragment extends Fragment {
                         String webUrl=c.getString("link");
                         String dateTaken=c.getString("date_taken");
                         String datePublished=c.getString("published");
+
                         JSONObject media=c.getJSONObject("media");
                         String srcUrl=media.getString("m");
 

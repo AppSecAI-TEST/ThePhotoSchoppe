@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Login"
-
+                android:gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
@@ -54,12 +54,25 @@
                 android:textColor="@color/colorDarkRed"
                 android:visibility="invisible"/>
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/tv_sign_up"
+                android:onClick="signUpFirst"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/sign_up_first"
+
+                android:textSize="16dp"
+                android:layout_gravity="end"/>
+
+            <Button
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_login"
                 android:layout_margin="5dp"
-                android:layout_gravity="end"
+                android:background="@color/primary_dark_material_dark"
+                android:textColor="@color/colorWhite"
                 android:onClick="onClickLogin"
                 android:text="@string/action_login"/>
 

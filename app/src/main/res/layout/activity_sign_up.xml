@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
-
+                android:gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
@@ -89,10 +89,12 @@
 
             <Button
                 android:id="@+id/btn_register"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+
                 android:layout_margin="5dp"
+                android:background="@color/primary_dark_material_dark"
+                android:textColor="@color/colorWhite"
                 android:onClick="saveSettings"
 
                 android:text="@string/action_register" />

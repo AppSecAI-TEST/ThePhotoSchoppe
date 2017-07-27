@@ -86,26 +86,32 @@ public class SignUpActivity extends AppCompatActivity {
         err_email.setVisibility(View.INVISIBLE);
 
 
-        boolean isRegister=getInstance().getBoolean(getString(R.string.key_registered),false);
-        boolean isLoggedIn=getInstance().getBoolean(getString(R.string.key_login),false);
-        if(isRegister){
-            if(isLoggedIn){
-                Intent intent =new Intent(SignUpActivity.this,MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+        boolean flag=getInstance().getBoolean(getString(R.string.key_request_sign_up),false);
 
+        Log.d(TAG,flag+"");
+
+        if(flag==false){
+            boolean isRegister=getInstance().getBoolean(getString(R.string.key_registered),false);
+            boolean isLoggedIn=getInstance().getBoolean(getString(R.string.key_login),false);
+            if(isRegister){
+                if(isLoggedIn){
+                    Intent intent =new Intent(SignUpActivity.this,MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Intent intent =new Intent(SignUpActivity.this,LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
             }
-            else {
-                Intent intent =new Intent(SignUpActivity.this,LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
-
-
         }
+        SharedPreferences.Editor editor=getInstance().edit();
+        editor.putBoolean(getString(R.string.key_request_sign_up),false);
 
+        editor.commit();
     }
 
 
