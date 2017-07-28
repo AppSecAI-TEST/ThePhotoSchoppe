@@ -11,14 +11,14 @@ import com.example.acer.thephotoschoppe.R;
 class Constants {
 
     static String baseUrl = "https://api.flickr.com/services/feeds/photos_public.gne";
-    static String userId = "26156338@N07";
+    static String userId = "52197692@N05";
     static String format = "json";
     static String nojsoncallback="1";
 
     static String userIdPrompt = "user_id";
     static String formatPrompt = "format";
     static String nojsoncallbackPrompt = "nojsoncallback";
-
+//151909443@N07
 
     //https://api.flickr.com/services/feeds/photos_public.gne
     // ?id=26156338@N07
