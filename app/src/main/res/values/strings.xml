@@ -43,7 +43,6 @@
     <string name="prompt_mobile">Contact :</string>
     <string name="prompt_mail">Email :</string>
 
-
     <!--validation strings-->
     <string name="username_required">* Username field required.</string>
     <string name="password_required">* Password field required.</string>
@@ -52,6 +51,9 @@
     <string name="password_not_match">Password confirmation did not matched.</string>
     <string name="incorrect_username">Invalid username or password.</string>
     <string name="incorrect_password">Invalid password.</string>
+    <string name="email_error">Invalid email address.</string>
+
+
 
     <string name="sign_up_first"><b><u>Sign Up First</u></b></string>
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -185,7 +186,10 @@ public class SignUpActivity extends AppCompatActivity {
 
             return;
         }
-        else {
+        else if(isValidEmail(txt_email.getText())) {
+
+
+
             editor.putBoolean(getString(R.string.key_registered), true);
             editor.putString(getString(R.string.key_username), txt_username.getText().toString());
             editor.putString(getString(R.string.key_password), txt_password.getText().toString());
@@ -204,6 +208,15 @@ public class SignUpActivity extends AppCompatActivity {
             finish();
 
         }
+        else {
+            Toast.makeText(SignUpActivity.this, "Please enter valid email address.", Toast.LENGTH_LONG).show();
+            err_email.setVisibility(View.VISIBLE);
+            err_email.setText(getString(R.string.email_error));
+        }
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
 }

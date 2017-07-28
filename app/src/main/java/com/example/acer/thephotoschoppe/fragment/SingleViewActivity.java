@@ -119,10 +119,7 @@ public class SingleViewActivity extends AppCompatActivity {
                 String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                 emailIntent.setType("plain/text");
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
-                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
-
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, photos.get(position).getSrcUrl());
                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             }
         });
@@ -133,10 +130,7 @@ public class SingleViewActivity extends AppCompatActivity {
                 String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                 emailIntent.setType("plain/text");
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
                 emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, photos.get(position).getSrcUrl());
-//                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             }
         });
