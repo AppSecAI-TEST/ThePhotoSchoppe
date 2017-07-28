@@ -30,7 +30,8 @@
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".fragment.SingleViewActivity"></activity>
+        <activity android:name=".fragment.SingleViewActivity" />
+        <activity android:name=".activities.BlankActivity"></activity>
     </application>
 
 </manifest>

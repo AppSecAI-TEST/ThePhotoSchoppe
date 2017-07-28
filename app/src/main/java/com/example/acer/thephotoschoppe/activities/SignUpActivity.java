@@ -60,11 +60,16 @@ public class SignUpActivity extends AppCompatActivity {
         File database = getApplicationContext().getDatabasePath(DatabaseHandler.getDBName());
         if(false == database.exists()) {
             getDBHandler().getReadableDatabase();
-            //Copy db
+            //Copy database
             if(copyDatabase(this)) {
-                //Toast.makeText(this, "Copy database success", Toast.LENGTH_SHORT).show();
+                //database copied successfully
+                Toast.makeText(this, "Application has installed successfully.", Toast.LENGTH_SHORT).show();
             } else {
-                //Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Something went wrong. Please reinstall.", Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent(SignUpActivity.this,BlankActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
                 return;
             }
         }
@@ -171,13 +176,13 @@ public class SignUpActivity extends AppCompatActivity {
             flag=true;
         }
         if(flag){
-            Toast.makeText(SignUpActivity.this,"Please make sure to fill the form properly",Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this,"Please make sure to fill the form properly.",Toast.LENGTH_LONG).show();
             return;
         }else if(!txt_confirm_password.getText().toString().equals(txt_password.getText().toString())){
-            Toast.makeText(SignUpActivity.this,"Password confirmation did not matched",Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this,"Password confirmation did not matched.",Toast.LENGTH_LONG).show();
             err_confirm_password.setText(getString(R.string.password_not_match));
             err_confirm_password.setVisibility(View.VISIBLE);
-//            txt_confirm_password.
+
             return;
         }
         else {
@@ -190,7 +195,7 @@ public class SignUpActivity extends AppCompatActivity {
             editor.commit();
 
             //success message
-            Toast.makeText(SignUpActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "User registered successfully.", Toast.LENGTH_LONG).show();
 
             //start new activity and kill the current activity
             Intent intent = new Intent(SignUpActivity.this, MainActivity.class);

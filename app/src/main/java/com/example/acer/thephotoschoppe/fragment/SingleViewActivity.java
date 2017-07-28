@@ -27,8 +27,8 @@ public class SingleViewActivity extends AppCompatActivity {
     private TextView titleTV;
     private TextView exploreWebTV;
     private ImageView exploreWebBtn;
-    private TextView attachPhotoTV;
-    private ImageView attachPhotoBtn;
+//    private TextView attachPhotoTV;
+//    private ImageView attachPhotoBtn;
 
     private int position;
     ArrayList<Photo> photos;
@@ -111,35 +111,42 @@ public class SingleViewActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        attachPhotoTV=(TextView)findViewById(R.id.attach_email_tv);
-        attachPhotoTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setType("plain/text");
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
-                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            }
-        });
-        attachPhotoBtn=(ImageView) findViewById(R.id.attach_email_btn);
-        attachPhotoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setType("plain/text");
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
-//                        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
-                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            }
-        });
 
+//        attachPhotoTV=(TextView)findViewById(R.id.attach_email_tv);
+//        attachPhotoTV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
+//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                emailIntent.setType("plain/text");
+////                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
+////                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
+////                        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
+//                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
+//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//            }
+//        });
+//        attachPhotoBtn=(ImageView) findViewById(R.id.attach_email_btn);
+//        attachPhotoBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
+//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                emailIntent.setType("plain/text");
+////                        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{strEmail});
+////                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
+////                        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
+//                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
+//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//            }
+//        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private SingleViewActivity getInstance(){

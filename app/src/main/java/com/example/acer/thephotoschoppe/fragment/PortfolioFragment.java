@@ -18,8 +18,10 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.acer.thephotoschoppe.R;
+import com.example.acer.thephotoschoppe.activities.SignUpActivity;
 import com.example.acer.thephotoschoppe.flickr.FlickrManager;
 import com.example.acer.thephotoschoppe.models.Photo;
 import com.squareup.picasso.Picasso;
@@ -103,19 +105,22 @@ public class PortfolioFragment extends Fragment {
                         JSONObject media=c.getJSONObject("media");
                         String srcUrl=media.getString("m");
 
-
+                        //create new photo object
                         Photo p=new Photo(title,webUrl,srcUrl,dateTaken,datePublished);
 
+                        //add photo to the list
                         photosList.add(p);
 
 
                     }
                 } catch (final JSONException e) {
+
                     e.printStackTrace();
 
                 }
             }
             else {
+
                 Log.d(TAG,"exception");
             }
 
@@ -127,77 +132,83 @@ public class PortfolioFragment extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            gridView.setAdapter(new BaseAdapter() {
-                @Override
-                public int getCount() {
-                    return photosList.size();
-                }
-
-                @Override
-                public Object getItem(int i) {
-                    return null;
-                }
-
-                @Override
-                public long getItemId(int i) {
-                    return 0;
-                }
-
-                @Override
-                public View getView(int i, View convertView, ViewGroup viewGroup) {
-
-                    Photo photo=photosList.get(i);
-                    View cellPhoto=null;
-                    if(convertView==null){
-                        cellPhoto= LayoutInflater.from(context).inflate(R.layout.grid_view_cell,null);
-                    }
-                    else {
-                        cellPhoto=convertView;
+            if(photosList.size()==0){
+                Toast.makeText(context,"Please check your internet connection and relaunch the app.",Toast.LENGTH_LONG).show();
+            }
+            else {
+                gridView.setAdapter(new BaseAdapter() {
+                    @Override
+                    public int getCount() {
+                        return photosList.size();
                     }
 
-                    PlaceHolder ph=(PlaceHolder)cellPhoto.getTag();
-
-                    ImageView image;
-                    TextView date;
-
-                    if(ph==null){
-                        image=(ImageView)cellPhoto.findViewById(R.id.image_view);
-                        date=(TextView)cellPhoto.findViewById(R.id.date_tv);
-                        ph=new PlaceHolder();
-                        ph.image=image;
-                        ph.date=date;
-                        cellPhoto.setTag(ph);
+                    @Override
+                    public Object getItem(int i) {
+                        return null;
                     }
-                    else {
-                        image=ph.image;
-                        date=ph.date;
+
+                    @Override
+                    public long getItemId(int i) {
+                        return 0;
                     }
-                    Picasso.with(context)
-                            .load(photo.getSrcUrl())
-                            .resize(150,150)
-                            .centerCrop()
-                            .into(image);
 
-                    date.setText(photo.getPublishedDate());
+                    @Override
+                    public View getView(int i, View convertView, ViewGroup viewGroup) {
 
-                    return cellPhoto;
-                }
-            });
+                        Photo photo=photosList.get(i);
+                        View cellPhoto=null;
+                        if(convertView==null){
+                            cellPhoto= LayoutInflater.from(context).inflate(R.layout.grid_view_cell,null);
+                        }
+                        else {
+                            cellPhoto=convertView;
+                        }
 
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent,
-                                        View v, int position, long id){
-//                     Send intent to SingleViewActivity
-                    Intent i = new Intent(context, SingleViewActivity.class);
-                    // Pass image index
-                    i.putExtra("id", position);
-                    i.putExtra("url",photosList.get(position).getSrcUrl());
-                    startActivity(i);
+                        PlaceHolder ph=(PlaceHolder)cellPhoto.getTag();
+
+                        ImageView image;
+                        TextView date;
+
+                        if(ph==null){
+                            image=(ImageView)cellPhoto.findViewById(R.id.image_view);
+                            date=(TextView)cellPhoto.findViewById(R.id.date_tv);
+                            ph=new PlaceHolder();
+                            ph.image=image;
+                            ph.date=date;
+                            cellPhoto.setTag(ph);
+                        }
+                        else {
+                            image=ph.image;
+                            date=ph.date;
+                        }
+                        Picasso.with(context)
+                                .load(photo.getSrcUrl())
+                                .resize(150,150)
+                                .centerCrop()
+                                .into(image);
+
+                        date.setText(photo.getTakenDate().substring(0,10));
+
+                        return cellPhoto;
+                    }
+                });
+
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> parent,
+                                            View v, int position, long id){
+                        //Send intent to SingleViewActivity
+                        Intent i = new Intent(context, SingleViewActivity.class);
+                        // Pass image index
+                        i.putExtra("id", position);
+                        i.putExtra("url",photosList.get(position).getSrcUrl());
+                        startActivity(i);
 
 
-                }
-            });
-            gridView.setDrawSelectorOnTop(true);
+                    }
+                });
+                gridView.setDrawSelectorOnTop(true);
+            }
+
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }

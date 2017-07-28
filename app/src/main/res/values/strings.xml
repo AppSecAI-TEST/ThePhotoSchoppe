@@ -17,6 +17,8 @@
     <string name="key_email">email</string>
     <string name="key_login">login</string>
 
+    <!--database details-->
+    <string name="database_location">/data/data/com.example.acer.thephotoschoppe/databases/</string>
 
     <!-- Strings related to sign up and login -->
     <string name="prompt_username">Username</string>
@@ -42,7 +44,7 @@
     <string name="prompt_mail">Email :</string>
 
 
-   <!--validation strings-->
+    <!--validation strings-->
     <string name="username_required">* Username field required.</string>
     <string name="password_required">* Password field required.</string>
     <string name="conf_password_required">* Confirm password field required.</string>
@@ -52,8 +54,6 @@
     <string name="incorrect_password">Invalid password.</string>
 
     <string name="sign_up_first"><b><u>Sign Up First</u></b></string>
-
-
 
 
 </resources>

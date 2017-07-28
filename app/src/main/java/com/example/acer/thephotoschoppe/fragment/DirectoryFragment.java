@@ -125,10 +125,11 @@ public class DirectoryFragment extends Fragment {
                 firstNameTV.setText(photographer.getFirstName());
                 lastNameTV.setText(photographer.getLastName());
 
-//                emailTV.setText(photographer.getEmail());
+                //underline the text
                 String email=new String(photographer.getEmail());
                 SpannableString content = new SpannableString(email);
                 content.setSpan(new UnderlineSpan(), 0, email.length(), 0);
+
                 emailTV.setText(content);
                 emailTV.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -158,7 +159,7 @@ public class DirectoryFragment extends Fragment {
                         //Fill it with Data
                         emailIntent.setType("plain/text");
                         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailTV.getText().toString()});
-                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hello, "+firstNameTV.getText());
+                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hello, "+firstNameTV.getText()+".");
 
 
                         // Send it off to the Activity-Chooser
@@ -168,11 +169,11 @@ public class DirectoryFragment extends Fragment {
                 });
 
 
-//                mobileTV.setText(photographer.getMobile());
-
+                //underline the text
                 String mobile=new String(photographer.getMobile());
                 SpannableString content_mobile = new SpannableString(mobile);
                 content_mobile.setSpan(new UnderlineSpan(), 0, mobile.length(), 0);
+
                 mobileTV.setText(content_mobile);
                 mobileTV.setOnClickListener(new View.OnClickListener() {
                     @Override

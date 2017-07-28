@@ -49,7 +49,7 @@ public class MoreFragment extends Fragment {
                 //Fill it with Data
                 emailIntent.setType("plain/text");
                 emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailTV.getText().toString()});
-                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Inquiry for the Photo Schoppe");
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Inquiry for the Photo Schoppe.");
 
 
                 // Send it off to the Activity-Chooser

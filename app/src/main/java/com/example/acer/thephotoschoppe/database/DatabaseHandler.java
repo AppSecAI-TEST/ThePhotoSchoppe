@@ -62,7 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         closeDatabase();
         return sortPhotographers(list.toArray(new Photographer[list.size()]));
-        //return list.toArray(new Photographer[list.size()]);
+
     }
 
     private Photographer[] sortPhotographers(Photographer[] photographers){
