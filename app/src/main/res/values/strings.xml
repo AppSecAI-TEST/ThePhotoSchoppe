@@ -52,8 +52,8 @@
     <string name="incorrect_username">Invalid username or password.</string>
     <string name="incorrect_password">Invalid password.</string>
     <string name="email_error">Invalid email address.</string>
-    <string name="short_password_error">Password must have at least 8 characters.</string>
-    <string name="short_username_error">Password must contain at least one symbol.</string>
+    <string name="short_password_error">Password must contain at least 8 characters.</string>
+    <string name="short_username_error">Username must contain at least 5 characters.</string>
     <string name="symbol_error">Password must contain at least one symbol.</string>
     <string name="uppercase_error">Password must contain at least one uppercase letter.</string>
     <string name="number_error">Password must contain at least one digit.</string>

@@ -43,6 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     private Button btn_register;
 
+
+
     SharedPreferences preferences;
     private SharedPreferences getInstance(){
         if(preferences==null){
@@ -63,9 +65,11 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
+
         //Check exists database
         File database = getApplicationContext().getDatabasePath(DatabaseHandler.getDBName());
-        if(false == database.exists()) {
+        if(!database.exists()) {
             getDBHandler().getReadableDatabase();
             //Copy database
             if(copyDatabase(this)) {
@@ -100,22 +104,34 @@ public class SignUpActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     if(!txt_username.getText().toString().equals("")){
-                        btn_register.setEnabled(true);
+
                         String error=isValidUsername(txt_username.getText().toString());
                         if(error!=null){
+
                             err_username.setText(error);
                             err_username.setVisibility(View.VISIBLE);
+                            btn_register.setEnabled(false);
+                        }
+                        else if(!hasError()){
+                            btn_register.setEnabled(true);
+                        }
+                        else {
+                            btn_register.setEnabled(false);
                         }
 
                     }
                     else {
                         err_username.setVisibility(View.VISIBLE);
                         err_username.setText(getString(R.string.username_required));
+                        btn_register.setEnabled(false);
+
                     }
 
                 }
                 else {
                     err_username.setText("");
+                    err_username.setVisibility(View.INVISIBLE);
+
                 }
             }
         });
@@ -128,15 +144,24 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                     if(!txt_password.getText().toString().equals("")){
-                        btn_register.setEnabled(true);
+
                         String error=isValidPassword(txt_password.getText().toString());
                         if(error!=null){
                             err_password.setText(error);
                             err_password.setVisibility(View.VISIBLE);
+                            btn_register.setEnabled(false);
+
+                        }else if(!hasError()){
+                            btn_register.setEnabled(true);
+                        }
+                        else {
+                            btn_register.setEnabled(false);
                         }
 
                     }else {
+
                         err_password.setVisibility(View.VISIBLE);
+                        btn_register.setEnabled(false);
                         err_password.setText(getString(R.string.password_required));
                     }
 
@@ -144,6 +169,8 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 else {
                     err_password.setText("");
+                    err_password.setVisibility(View.INVISIBLE);
+
                 }
             }
         });
@@ -153,21 +180,35 @@ public class SignUpActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     if(!txt_confirm_password.getText().toString().equals("")){
-                        btn_register.setEnabled(true);
+                       // btn_register.setEnabled(true);
                         if(!txt_confirm_password.getText().toString().equals(txt_password.getText().toString())){
                             err_confirm_password.setText(getString(R.string.password_not_match));
                             err_confirm_password.setVisibility(View.VISIBLE);
+                            btn_register.setEnabled(false);
 
+
+
+                        }else if(!hasError()){
+                            btn_register.setEnabled(true);
+                        }
+                        else {
+                            btn_register.setEnabled(false);
                         }
 
                     }else {
                         err_confirm_password.setVisibility(View.VISIBLE);
                         err_confirm_password.setText(getString(R.string.conf_password_required));
+                        btn_register.setEnabled(false);
+
+
                     }
 
                 }
                 else {
                     err_confirm_password.setText("");
+                    err_confirm_password.setVisibility(View.INVISIBLE);
+
+
                 }
             }
         });
@@ -177,21 +218,29 @@ public class SignUpActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     if(!txt_email.getText().toString().equals("")){
-                        btn_register.setEnabled(true);
+                        //btn_register.setEnabled(true);
                         if(!isValidEmail(txt_email.getText())){
                             err_email.setVisibility(View.VISIBLE);
                             err_email.setText(getString(R.string.email_error));
+                            btn_register.setEnabled(false);
+                        }else if(!hasError()){
+                            btn_register.setEnabled(true);
+                        }
+                        else {
+                            btn_register.setEnabled(false);
                         }
 
                     }
                     else {
                         err_email.setVisibility(View.VISIBLE);
                         err_email.setText(getString(R.string.email_required));
+                        btn_register.setEnabled(false);
                     }
 
                 }
                 else {
                     err_email.setText("");
+                    err_email.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -204,7 +253,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         Log.d(TAG,flag+"");
 
-        if(flag==false){
+        if(!flag){
             boolean isRegister=getInstance().getBoolean(getString(R.string.key_registered),false);
             boolean isLoggedIn=getInstance().getBoolean(getString(R.string.key_login),false);
             if(isRegister){
@@ -267,26 +316,31 @@ public class SignUpActivity extends AppCompatActivity {
         if(txt_username.getText().toString().equals("")){
             err_username.setVisibility(View.VISIBLE);
             err_username.setText(getString(R.string.username_required));
+            btn_register.setEnabled(false);
             flag=true;
         }
         if(txt_email.getText().toString().equals("")){
             err_email.setVisibility(View.VISIBLE);
             err_email.setText(getString(R.string.email_required));
+            btn_register.setEnabled(false);
             flag=true;
         }
         if(txt_password.getText().toString().equals("")){
             err_password.setVisibility(View.VISIBLE);
             err_password.setText(getString(R.string.password_required));
+            btn_register.setEnabled(false);
             flag=true;
         }
         if(txt_confirm_password.getText().toString().equals("")){
             err_confirm_password.setVisibility(View.VISIBLE);
+            btn_register.setEnabled(false);
             err_confirm_password.setText(getString(R.string.conf_password_required));
             flag=true;
         }
         if(!flag && !txt_confirm_password.getText().toString().equals(txt_password.getText().toString())){
             err_confirm_password.setText(getString(R.string.password_not_match));
             err_confirm_password.setVisibility(View.VISIBLE);
+            btn_register.setEnabled(false);
 
             return;
         }
@@ -312,6 +366,7 @@ public class SignUpActivity extends AppCompatActivity {
             }else {
                 err_password.setText(error);
                 err_password.setVisibility(View.VISIBLE);
+                btn_register.setEnabled(false);
             }
 
 
@@ -364,6 +419,19 @@ public class SignUpActivity extends AppCompatActivity {
         else {
 
             return getString(R.string.short_password_error);
+        }
+
+    }
+
+    private boolean hasError(){
+        if(err_email.getVisibility()==View.VISIBLE ||
+                err_username.getVisibility()==View.VISIBLE ||
+                err_password.getVisibility()==View.VISIBLE ||
+                err_confirm_password.getVisibility()==View.VISIBLE){
+            return true;
+        }
+        else {
+            return false;
         }
 
     }

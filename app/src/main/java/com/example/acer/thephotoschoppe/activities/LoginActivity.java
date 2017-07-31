@@ -42,8 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btn_login=(Button)findViewById(R.id.btn_login);
-        btn_login.setSelected(false);
+        btn_login.setEnabled(false);
 
+        err_username=(TextView) findViewById(R.id.username_err);
+        err_password=(TextView)findViewById(R.id.password_err);
+        err_username.setVisibility(View.INVISIBLE);
+        err_password.setVisibility(View.INVISIBLE);
 
         txt_username=(EditText)findViewById(R.id.txt_username);
         txt_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -51,13 +55,25 @@ public class LoginActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     if(!txt_username.getText().toString().equals("")){
-                        btn_login.setSelected(true);
+                        if(!hasError()){
+                            btn_login.setEnabled(true);
+                        }else {
+                            btn_login.setEnabled(false);
 
+                        }
+
+
+                    }else {
+                        err_username.setText(getString(R.string.username_required));
+                        err_username.setVisibility(View.VISIBLE);
+                        btn_login.setEnabled(false);
                     }
-                    // code to execute when EditText loses focus
+
                 }
                 else {
                     err_username.setText("");
+                    err_password.setVisibility(View.INVISIBLE);
+
                 }
             }
         });
@@ -68,21 +84,30 @@ public class LoginActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     if(!txt_password.getText().toString().equals("")){
-                        btn_login.setSelected(true);
+                        if(!hasError()){
+                            btn_login.setEnabled(true);
+                        }
+                        else {
+                            btn_login.setEnabled(false);
+
+                        }
 
                     }
-                    // code to execute when EditText loses focus
+                    else {
+                        err_password.setText(getString(R.string.password_required));
+                        err_password.setVisibility(View.VISIBLE);
+                        btn_login.setEnabled(false);
+                    }
+
                 }
                 else {
                     err_password.setText("");
+                    err_password.setVisibility(View.INVISIBLE);
                 }
             }
         });
 
-        err_username=(TextView) findViewById(R.id.username_err);
-        err_password=(TextView)findViewById(R.id.password_err);
-        err_username.setVisibility(View.INVISIBLE);
-        err_password.setVisibility(View.INVISIBLE);
+
 
 
     }
@@ -170,6 +195,18 @@ public class LoginActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+
+    }
+
+
+    private boolean hasError(){
+        if(err_username.getVisibility()==View.VISIBLE ||
+                err_password.getVisibility()==View.VISIBLE){
+            return true;
+        }
+        else {
+            return false;
+        }
 
     }
 
