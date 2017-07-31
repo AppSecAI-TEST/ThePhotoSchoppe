@@ -1,12 +1,14 @@
 package com.example.acer.thephotoschoppe.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         PortfolioFragment portfolioFragment=new PortfolioFragment();
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main_layout,portfolioFragment).commit();
+        this.setTitle(getString(R.string.title_activity_main));
     }
 
     @Override
@@ -108,17 +111,36 @@ public class MainActivity extends AppCompatActivity
             this.setTitle("Contact Information");
 
         }else if (id == R.id.nav_logout) {
-            SharedPreferences.Editor editor=getInstance().edit();
-            editor.putBoolean(getString(R.string.key_login),false);
-            editor.putBoolean(getString(R.string.key_registered),true);
-            //commit changes to make in the editor
-            editor.commit();
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Logout");
+            alertDialog.setMessage("Do you want to logout from this app?");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor=getInstance().edit();
+                            editor.putBoolean(getString(R.string.key_login),false);
+                            editor.putBoolean(getString(R.string.key_registered),true);
+                            //commit changes to make in the editor
+                            editor.commit();
 
-            //finish the current activity and start new activity
-            Intent intent =new Intent(MainActivity.this,LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
+                            //finish the current activity and start new activity
+                            Intent intent =new Intent(MainActivity.this,LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"CANCEL",
+                    new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+
 
         }
 

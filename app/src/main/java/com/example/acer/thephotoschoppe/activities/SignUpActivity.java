@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView err_password;
     private TextView err_confirm_password;
     private TextView err_email;
+
+    private Button btn_register;
 
     SharedPreferences preferences;
     private SharedPreferences getInstance(){
@@ -64,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
             //Copy database
             if(copyDatabase(this)) {
                 //database copied successfully
-                Toast.makeText(this, "Application has installed successfully.", Toast.LENGTH_SHORT).show();
+
             } else {
                 Toast.makeText(this, "Something went wrong. Please reinstall.", Toast.LENGTH_SHORT).show();
                 Intent intent =new Intent(SignUpActivity.this,BlankActivity.class);
@@ -75,10 +78,61 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
 
+        btn_register=(Button)findViewById(R.id.btn_register);
+        btn_register.setSelected(false);
+
         txt_username=(EditText)findViewById(R.id.txt_username);
+        txt_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if(!txt_username.getText().toString().equals("")){
+                        btn_register.setSelected(true);
+
+                    }
+                    // code to execute when EditText loses focus
+                }
+            }
+        });
+
         txt_password=(EditText)findViewById(R.id.txt_password);
+        txt_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if(!txt_username.getText().toString().equals("")){
+                        btn_register.setSelected(true);
+
+                    }
+                    // code to execute when EditText loses focus
+                }
+            }
+        });
         txt_confirm_password=(EditText)findViewById(R.id.txt_confirm_password);
+        txt_confirm_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if(!txt_username.getText().toString().equals("")){
+                        btn_register.setSelected(true);
+                    }
+                    // code to execute when EditText loses focus
+                }
+            }
+        });
         txt_email=(EditText)findViewById(R.id.txt_email);
+        txt_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if(!txt_username.getText().toString().equals("")){
+                        btn_register.setSelected(true);
+
+                    }
+                    // code to execute when EditText loses focus
+                }
+            }
+        });
 
 
         err_username=(TextView) findViewById(R.id.username_err);
@@ -168,7 +222,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
         if(txt_password.getText().toString().equals("")){
             err_password.setVisibility(View.VISIBLE);
-            err_password.setText(getString(R.string.conf_password_required));
+            err_password.setText(getString(R.string.password_required));
             flag=true;
         }
         if(txt_confirm_password.getText().toString().equals("")){
@@ -177,10 +231,8 @@ public class SignUpActivity extends AppCompatActivity {
             flag=true;
         }
         if(flag){
-            Toast.makeText(SignUpActivity.this,"Please make sure to fill the form properly.",Toast.LENGTH_LONG).show();
             return;
         }else if(!txt_confirm_password.getText().toString().equals(txt_password.getText().toString())){
-            Toast.makeText(SignUpActivity.this,"Password confirmation did not matched.",Toast.LENGTH_LONG).show();
             err_confirm_password.setText(getString(R.string.password_not_match));
             err_confirm_password.setVisibility(View.VISIBLE);
 
@@ -209,7 +261,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(SignUpActivity.this, "Please enter valid email address.", Toast.LENGTH_LONG).show();
             err_email.setVisibility(View.VISIBLE);
             err_email.setText(getString(R.string.email_error));
         }

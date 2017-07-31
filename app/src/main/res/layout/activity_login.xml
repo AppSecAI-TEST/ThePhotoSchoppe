@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_login"
                 android:layout_margin="5dp"
-                android:background="@color/primary_dark_material_dark"
+                android:background="@drawable/button_states"
                 android:textColor="@color/colorWhite"
                 android:onClick="onClickLogin"
                 android:text="@string/action_login"/>

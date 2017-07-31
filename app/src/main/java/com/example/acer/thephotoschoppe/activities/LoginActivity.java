@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         if(flag){
-            Toast.makeText(LoginActivity.this,"Please fill the form properly.",Toast.LENGTH_LONG).show();
+
             //clear data
             txt_username.setText("");
             txt_password.setText("");
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                     //error message
                     err_password.setVisibility(View.VISIBLE);
                     err_password.setText(getString(R.string.incorrect_password));
-                    Toast.makeText(LoginActivity.this,"Login failed.",Toast.LENGTH_LONG).show();
+
 
                     //clear data
 
@@ -110,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
                 //error message
                 err_password.setVisibility(View.VISIBLE);
                 err_password.setText(getString(R.string.incorrect_username));
-                Toast.makeText(LoginActivity.this,"Login failed.",Toast.LENGTH_LONG).show();
 
                 //clear data
                 txt_username.setText("");

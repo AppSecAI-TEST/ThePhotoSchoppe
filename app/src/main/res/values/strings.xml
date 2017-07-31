@@ -3,7 +3,7 @@
     <!--strings use to name activities and views-->
     <string name="app_name">Photo Shoppe</string>
     <string name="title_activity_navigation">Navigation Activity</string>
-    <string name="title_activity_main">Main Activity</string>
+    <string name="title_activity_main">Home</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

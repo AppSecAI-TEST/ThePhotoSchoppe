@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_margin="5dp"
-                android:background="@color/primary_dark_material_dark"
+                android:background="@drawable/button_states"
                 android:textColor="@color/colorWhite"
                 android:onClick="saveSettings"
 
