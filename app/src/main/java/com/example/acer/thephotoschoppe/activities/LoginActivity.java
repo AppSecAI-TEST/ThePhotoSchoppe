@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView err_username;
     private TextView err_password;
 
+    private Button btn_login;
+
 
     SharedPreferences preferences;
     private SharedPreferences getInstance(){
@@ -38,8 +41,43 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        btn_login=(Button)findViewById(R.id.btn_login);
+        btn_login.setSelected(false);
+
+
         txt_username=(EditText)findViewById(R.id.txt_username);
+        txt_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if(!txt_username.getText().toString().equals("")){
+                        btn_login.setSelected(true);
+
+                    }
+                    // code to execute when EditText loses focus
+                }
+                else {
+                    err_username.setText("");
+                }
+            }
+        });
+
         txt_password=(EditText)findViewById(R.id.txt_password);
+        txt_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if(!txt_password.getText().toString().equals("")){
+                        btn_login.setSelected(true);
+
+                    }
+                    // code to execute when EditText loses focus
+                }
+                else {
+                    err_password.setText("");
+                }
+            }
+        });
 
         err_username=(TextView) findViewById(R.id.username_err);
         err_password=(TextView)findViewById(R.id.password_err);
