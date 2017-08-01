@@ -129,6 +129,13 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
             alertDialog.setTitle("Logout");
             alertDialog.setMessage("Do you want to logout from this app?");
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"CANCEL",
+                    new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    });
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -146,13 +153,7 @@ public class MainActivity extends AppCompatActivity
                         }
                     });
 
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"CANCEL",
-                    new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog, int i) {
-                            dialog.dismiss();
-                        }
-                    });
+
             alertDialog.show();
 
 
