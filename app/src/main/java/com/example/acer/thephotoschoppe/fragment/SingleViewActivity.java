@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.acer.thephotoschoppe.R;
+import com.example.acer.thephotoschoppe.flickr.FlickrManager;
 import com.example.acer.thephotoschoppe.listener.OnSwipeTouchListener;
 import com.example.acer.thephotoschoppe.models.Photo;
 import com.squareup.picasso.Picasso;
@@ -39,7 +40,7 @@ public class SingleViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_view);
         setTitle("Photo");
 
-        photos=PortfolioFragment.getPhotos();
+        photos= FlickrManager.getPhotos();
 
         // Get intent data
         Intent i = getIntent();
@@ -95,7 +96,7 @@ public class SingleViewActivity extends AppCompatActivity {
         exploreWebTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = PortfolioFragment.getPhotos().get(position).getWebUrl();
+                String url = FlickrManager.getPhotos().get(position).getWebUrl();
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
@@ -105,7 +106,7 @@ public class SingleViewActivity extends AppCompatActivity {
         exploreWebBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = PortfolioFragment.getPhotos().get(position).getWebUrl();
+                String url = FlickrManager.getPhotos().get(position).getWebUrl();
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
@@ -116,7 +117,7 @@ public class SingleViewActivity extends AppCompatActivity {
         attachPhotoTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
+                String url = FlickrManager.getPhotos().get(position).getSrcUrl();
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                 emailIntent.setType("plain/text");
                 emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, photos.get(position).getSrcUrl());
@@ -127,7 +128,7 @@ public class SingleViewActivity extends AppCompatActivity {
         attachPhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = PortfolioFragment.getPhotos().get(position).getSrcUrl();
+                String url = FlickrManager.getPhotos().get(position).getSrcUrl();
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                 emailIntent.setType("plain/text");
                 emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, photos.get(position).getSrcUrl());

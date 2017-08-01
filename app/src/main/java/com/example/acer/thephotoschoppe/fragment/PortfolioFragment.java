@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class PortfolioFragment extends Fragment {
 
 
-    static ArrayList<Photo> photosList;
+    static ArrayList<String> photoidList;
     Context context;
     GridView gridView;
 
@@ -54,9 +54,9 @@ public class PortfolioFragment extends Fragment {
         gridView=(GridView) rootView.findViewById(R.id.gridView);
 
         context=getContext();
-        photosList=new ArrayList<>();
+        photoidList=new ArrayList<>();
 
-        new GetContacts().execute();
+        new GetContacts(context).execute();
         return rootView;
     }
 
@@ -64,10 +64,17 @@ public class PortfolioFragment extends Fragment {
     private class GetContacts extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog pDialog;
+        Context contx;
+
+        public GetContacts(Context context){
+            this.contx=context;
+        }
+
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog=new ProgressDialog(context);
+            pDialog=new ProgressDialog(contx);
             pDialog.setMessage("Please wait");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -76,52 +83,14 @@ public class PortfolioFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            FlickrManager handler=new FlickrManager();
 
-            String imagesUrl=handler.getImageListUrl();
-            String jsonStr=handler.makeServiceCall(imagesUrl);
+            if(FlickrManager.getPhotos().size()==0){
+                FlickrManager handler=new FlickrManager();
 
-            if(jsonStr!=null){
-                try {
-                    JSONObject jsonObject=new JSONObject(jsonStr);
+                String galleryUrl=handler.getGalleryUrl();
+                String galleryJson=handler.makeServiceCall(galleryUrl);
+                readPhotoGallery(galleryJson,handler);
 
-                    JSONArray photos=jsonObject.getJSONArray("items");
-                    int breakpoint;
-                    if(photos.length()>10){
-                        breakpoint=10;
-                    }
-                    else {
-                        breakpoint=photos.length();
-                    }
-
-                    for (int i=0;i<breakpoint;i++){
-                        JSONObject c=photos.getJSONObject(i);
-
-                        String title=c.getString("title");
-                        String webUrl=c.getString("link");
-                        String dateTaken=c.getString("date_taken");
-                        String datePublished=c.getString("published");
-
-                        JSONObject media=c.getJSONObject("media");
-                        String srcUrl=media.getString("m");
-
-                        //create new photo object
-                        Photo p=new Photo(title,webUrl,srcUrl,dateTaken,datePublished);
-
-                        //add photo to the list
-                        photosList.add(p);
-
-
-                    }
-                } catch (final JSONException e) {
-
-                    e.printStackTrace();
-
-                }
-            }
-            else {
-
-                Log.d(TAG,"exception");
             }
 
             return null;
@@ -132,14 +101,14 @@ public class PortfolioFragment extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            if(photosList.size()==0){
+            if(FlickrManager.getPhotos().size()==0){
                 Toast.makeText(context,"Please check your internet connection and relaunch the app.",Toast.LENGTH_LONG).show();
             }
             else {
                 gridView.setAdapter(new BaseAdapter() {
                     @Override
                     public int getCount() {
-                        return photosList.size();
+                        return FlickrManager.getPhotos().size();
                     }
 
                     @Override
@@ -155,7 +124,7 @@ public class PortfolioFragment extends Fragment {
                     @Override
                     public View getView(int i, View convertView, ViewGroup viewGroup) {
 
-                        Photo photo=photosList.get(i);
+                        Photo photo=FlickrManager.getPhotos().get(i);
                         View cellPhoto=null;
                         if(convertView==null){
                             cellPhoto= LayoutInflater.from(context).inflate(R.layout.grid_view_cell,null);
@@ -171,7 +140,7 @@ public class PortfolioFragment extends Fragment {
 
                         if(ph==null){
                             image=(ImageView)cellPhoto.findViewById(R.id.image_view);
-                            date=(TextView)cellPhoto.findViewById(R.id.date_tv);
+                            date=(TextView)cellPhoto.findViewById(R.id.title);
                             ph=new PlaceHolder();
                             ph.image=image;
                             ph.date=date;
@@ -187,7 +156,9 @@ public class PortfolioFragment extends Fragment {
                                 .centerCrop()
                                 .into(image);
 
-                        date.setText(photo.getTakenDate().substring(0,10));
+
+
+                        date.setText(photo.getTitle());
 
                         return cellPhoto;
                     }
@@ -200,7 +171,7 @@ public class PortfolioFragment extends Fragment {
                         Intent i = new Intent(context, SingleViewActivity.class);
                         // Pass image index
                         i.putExtra("id", position);
-                        i.putExtra("url",photosList.get(position).getSrcUrl());
+                        i.putExtra("url",FlickrManager.getPhotos().get(position).getSrcUrl());
                         startActivity(i);
 
 
@@ -209,9 +180,9 @@ public class PortfolioFragment extends Fragment {
                 gridView.setDrawSelectorOnTop(true);
             }
 
-            if(pDialog.isShowing()){
+
                 pDialog.dismiss();
-            }
+
         }
         private class PlaceHolder{
             ImageView image;
@@ -219,8 +190,133 @@ public class PortfolioFragment extends Fragment {
         }
     }
 
-    public static ArrayList<Photo> getPhotos(){
-        return photosList;
+
+
+    private void readPhotoGallery(String galleryJson,FlickrManager handler){
+
+        if(galleryJson!=null){
+            try {
+                JSONObject jsonObject=new JSONObject(galleryJson);
+
+                JSONObject photoObject=jsonObject.getJSONObject("photos");
+                JSONArray photos=photoObject.getJSONArray("photo");
+
+                int breakpoint;
+                if(photos.length()>10){
+                    breakpoint=10;
+                }
+                else {
+                    breakpoint=photos.length();
+                }
+
+                for (int i=0;i<breakpoint;i++){
+                    JSONObject c=photos.getJSONObject(i);
+
+                    String id=c.getString("id");
+                    String title=c.getString("title");
+//                    String webUrl=c.getString("link");
+//                    String dateTaken=c.getString("date_taken");
+//                    String datePublished=c.getString("published");
+//
+//                    JSONObject media=c.getJSONObject("media");
+//                    String srcUrl=media.getString("m");
+
+                    //create new photo object
+                    Photo p=new Photo(id,title);
+
+                    setPhotoInfo(p,handler);
+                    //add photo to the list
+                    FlickrManager.getPhotos().add(p);
+
+
+                }
+            } catch (final JSONException e) {
+
+                e.printStackTrace();
+
+            }
+        }
+        else {
+            FlickrManager.getPhotos().clear();
+            Log.d(TAG,"exception");
+        }
+
+    }
+
+
+    private void setSourceUrl(Photo photo,FlickrManager handler){
+
+        String photoSizesUrl=handler.getPhotoSizesUrl(photo.getId());
+
+
+        String jsonStr=handler.makeServiceCall(photoSizesUrl);
+
+        if(jsonStr!=null){
+            try {
+                JSONObject jsonObject=new JSONObject(jsonStr);
+
+                JSONObject sizesObject=jsonObject.getJSONObject("sizes");
+
+                JSONArray urls=sizesObject.getJSONArray("size");
+
+                JSONObject url=urls.getJSONObject(urls.length()-1);
+
+                photo.setSrcUrl(url.getString("source"));
+
+
+            } catch (final JSONException e) {
+
+                e.printStackTrace();
+
+            }
+        }
+        else {
+
+            Log.d(TAG,"exception");
+            FlickrManager.getPhotos().clear();
+
+        }
+
+    }
+
+
+    private void setPhotoInfo(Photo photo,FlickrManager handler){
+        String infoUrl=handler.getPhotoInfoUrl(photo.getId());
+
+
+        String jsonStr=handler.makeServiceCall(infoUrl);
+
+        if(jsonStr!=null){
+            try {
+                JSONObject jsonObject=new JSONObject(jsonStr);
+
+                JSONObject photoObject=jsonObject.getJSONObject("photo");
+                JSONObject photos=photoObject.getJSONObject("urls");
+
+                JSONArray urls=photos.getJSONArray("url");
+
+                JSONObject url=urls.getJSONObject(0);
+
+                photo.setWebUrl(url.getString("_content"));
+
+
+            } catch (final JSONException e) {
+
+                e.printStackTrace();
+
+            }
+        }
+        else {
+
+            Log.d(TAG,"exception");
+            FlickrManager.getPhotos().clear();
+
+        }
+
+        setSourceUrl(photo,handler);
+
+
+
     }
 
 }

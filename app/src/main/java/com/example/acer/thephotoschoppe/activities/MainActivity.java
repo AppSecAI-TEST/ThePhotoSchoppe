@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String  TAG ="NavigationActivity" ;
+    ConstraintLayout layout;
+
 
     SharedPreferences preferences;
     private SharedPreferences getInstance(){
@@ -57,6 +61,9 @@ public class MainActivity extends AppCompatActivity
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main_layout,portfolioFragment).commit();
         this.setTitle(getString(R.string.title_activity_main));
+        layout=(ConstraintLayout)findViewById(R.id.constraint);
+        layout.setBackgroundResource(R.drawable.background4);
+
     }
 
     @Override
@@ -95,6 +102,8 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager=getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.main_layout,portfolioFragment).commit();
             this.setTitle("Portfolio");
+            layout.setBackgroundResource(R.drawable.background4);
+
             // Handle the camera action
 
         } else if (id == R.id.nav_directory) {
@@ -102,6 +111,8 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager=getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.main_layout,directoryFragment).commit();
             this.setTitle("Directory");
+            layout.setBackgroundResource(R.drawable.images_back);
+
 
 
         } else if (id == R.id.nav_more) {
@@ -109,6 +120,10 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager=getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.main_layout,moreFragment).commit();
             this.setTitle("Contact Information");
+
+            layout.setBackgroundResource(R.drawable.background);
+
+
 
         }else if (id == R.id.nav_logout) {
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
