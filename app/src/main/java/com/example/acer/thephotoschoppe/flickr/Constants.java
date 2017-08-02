@@ -16,7 +16,9 @@ class Constants {
     static String method2="flickr.photos.getSizes";
     static String method3="flickr.photos.getInfo";
 
-    static String apiKey="14994975868e510312ec4f51dfc7701a";
+//    static String apiKey="14994975868e510312ec4f51dfc7701a";
+    static String apiKey="51840175fd7e7034e83617b9d0bdd785";
+
 
     static String galleryId="61481170-72157636837427206";
 

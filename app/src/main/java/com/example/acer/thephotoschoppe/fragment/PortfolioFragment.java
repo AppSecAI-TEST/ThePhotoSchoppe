@@ -21,21 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.acer.thephotoschoppe.R;
-import com.example.acer.thephotoschoppe.activities.SignUpActivity;
 import com.example.acer.thephotoschoppe.flickr.FlickrManager;
 import com.example.acer.thephotoschoppe.models.Photo;
 import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.util.ArrayList;
 
 public class PortfolioFragment extends Fragment {
 
 
-    static ArrayList<String> photoidList;
     Context context;
     GridView gridView;
 
@@ -54,7 +50,7 @@ public class PortfolioFragment extends Fragment {
         gridView=(GridView) rootView.findViewById(R.id.gridView);
 
         context=getContext();
-        photoidList=new ArrayList<>();
+
 
         new GetContacts(context).execute();
         return rootView;
@@ -66,7 +62,7 @@ public class PortfolioFragment extends Fragment {
         ProgressDialog pDialog;
         Context contx;
 
-        public GetContacts(Context context){
+        GetContacts(Context context){
             this.contx=context;
         }
 
@@ -102,7 +98,7 @@ public class PortfolioFragment extends Fragment {
             super.onPostExecute(result);
 
             if(FlickrManager.getPhotos().size()==0){
-                Toast.makeText(context,"Please check your internet connection and relaunch the app.",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Please check your internet c onnection and relaunch the app.",Toast.LENGTH_LONG).show();
             }
             else {
                 gridView.setAdapter(new BaseAdapter() {
@@ -125,7 +121,7 @@ public class PortfolioFragment extends Fragment {
                     public View getView(int i, View convertView, ViewGroup viewGroup) {
 
                         Photo photo=FlickrManager.getPhotos().get(i);
-                        View cellPhoto=null;
+                        View cellPhoto;
                         if(convertView==null){
                             cellPhoto= LayoutInflater.from(context).inflate(R.layout.grid_view_cell,null);
                         }
@@ -136,19 +132,19 @@ public class PortfolioFragment extends Fragment {
                         PlaceHolder ph=(PlaceHolder)cellPhoto.getTag();
 
                         ImageView image;
-                        TextView date;
+                        TextView title;
 
                         if(ph==null){
                             image=(ImageView)cellPhoto.findViewById(R.id.image_view);
-                            date=(TextView)cellPhoto.findViewById(R.id.title);
+                            title=(TextView)cellPhoto.findViewById(R.id.title_tv);
                             ph=new PlaceHolder();
                             ph.image=image;
-                            ph.date=date;
+                            ph.date=title;
                             cellPhoto.setTag(ph);
                         }
                         else {
                             image=ph.image;
-                            date=ph.date;
+                            title=ph.date;
                         }
                         Picasso.with(context)
                                 .load(photo.getSrcUrl())
@@ -158,7 +154,7 @@ public class PortfolioFragment extends Fragment {
 
 
 
-                        date.setText(photo.getTitle());
+                        title.setText(photo.getTitle());
 
                         return cellPhoto;
                     }
@@ -209,17 +205,14 @@ public class PortfolioFragment extends Fragment {
                     breakpoint=photos.length();
                 }
 
+
                 for (int i=0;i<breakpoint;i++){
                     JSONObject c=photos.getJSONObject(i);
 
                     String id=c.getString("id");
                     String title=c.getString("title");
-//                    String webUrl=c.getString("link");
-//                    String dateTaken=c.getString("date_taken");
-//                    String datePublished=c.getString("published");
-//
-//                    JSONObject media=c.getJSONObject("media");
-//                    String srcUrl=media.getString("m");
+
+
 
                     //create new photo object
                     Photo p=new Photo(id,title);

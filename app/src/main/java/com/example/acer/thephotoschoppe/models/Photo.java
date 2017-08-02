@@ -12,6 +12,7 @@ public class Photo {
     private String title;
     private String webUrl;
     private String srcUrl;
+    private String name;
 
 
 //    public Photo(String title,String webUrl,String srcUrl,String takenDate,String publishedDate){
@@ -29,6 +30,7 @@ public class Photo {
     public Photo(String id,String title){
         this.id=id;
         this.title=title;
+        this.name=id+".jpeg";
     }
 
 
@@ -57,5 +59,9 @@ public class Photo {
 
     public String getSrcUrl() {
         return srcUrl;
+    }
+
+    public String getName() {
+        return name;
     }
 }

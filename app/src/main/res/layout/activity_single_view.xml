@@ -17,59 +17,59 @@
             android:layout_margin="10dp"
             android:textColor="@color/colorWhite"
             android:text="title"/>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+                <ImageButton
+
+                    android:layout_width="40dp"
+                    android:id="@+id/explore_web_btn"
+                    android:src="@mipmap/ic_flikcr"
+
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:layout_margin="10dp"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorWhite"
+                    android:id="@+id/explore_web_tv"
 
-                        <ImageButton
+                    android:text="View in Flikcr"/>
 
-                            android:layout_width="40dp"
-                            android:id="@+id/explore_web_btn"
-                            android:src="@mipmap/ic_flikcr"
-
-                            android:layout_height="40dp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:textSize="15dp"
-                            android:textColor="@color/colorWhite"
-                            android:id="@+id/explore_web_tv"
-
-                            android:text="View in Flikcr"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-
-                    android:layout_margin="5dp">
-                        <ImageButton
-                            android:layout_width="40dp"
-                            android:id="@+id/attach_email_btn"
-                            android:src="@mipmap/ic_gmail"
-
-                            android:layout_height="40dp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:textSize="15dp"
-                            android:textColor="@color/colorWhite"
-                            android:id="@+id/attach_email_tv"
-                            android:text="Attach with Email"/>
-
-                </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_margin="5dp">
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:id="@+id/attach_email_btn"
+                    android:src="@mipmap/ic_gmail"
+
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorWhite"
+                    android:id="@+id/attach_email_tv"
+                    android:text="Attach with Email"/>
+
+        </LinearLayout>
+
+<ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:id="@+id/test"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

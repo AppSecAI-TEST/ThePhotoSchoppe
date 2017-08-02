@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         manager.beginTransaction().replace(R.id.main_layout,portfolioFragment).commit();
         this.setTitle(getString(R.string.title_activity_main));
         layout=(ConstraintLayout)findViewById(R.id.constraint);
-        layout.setBackgroundResource(R.drawable.background4);
+        layout.setBackgroundResource(R.drawable.background10);
 
     }
 
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager=getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.main_layout,portfolioFragment).commit();
             this.setTitle("Portfolio");
-            layout.setBackgroundResource(R.drawable.background4);
+            layout.setBackgroundResource(R.drawable.background10);
 
             // Handle the camera action
 
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity
             manager.beginTransaction().replace(R.id.main_layout,moreFragment).commit();
             this.setTitle("Contact Information");
 
-            layout.setBackgroundResource(R.drawable.background);
+            layout.setBackgroundResource(R.drawable.background11);
 
 
 
