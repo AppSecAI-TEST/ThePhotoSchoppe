@@ -161,10 +161,10 @@ public class SingleViewActivity extends AppCompatActivity {
 //                emailIntent.setType("plain/text");
 
         emailIntent.setType("image/jpeg");
-
-        ImageView textImage=(ImageView)findViewById(R.id.test);
-        Log.d(TAG,imageFile+"");
-        Picasso.with(context).load(imageFile).into(textImage);
+//
+//        ImageView textImage=(ImageView)findViewById(R.id.test);
+//        Log.d(TAG,imageFile+"");
+//        Picasso.with(context).load(imageFile).into(textImage);
 //        File imageFile=
 
         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile));
