@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/title"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_margin="10dp"
             android:textColor="@color/colorWhite"
             android:text="title"/>

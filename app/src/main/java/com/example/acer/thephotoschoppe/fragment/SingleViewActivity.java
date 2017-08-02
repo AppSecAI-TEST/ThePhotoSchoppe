@@ -41,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.support.v4.content.FileProvider.getUriForFile;
+
 public class SingleViewActivity extends AppCompatActivity {
 
     private static final String TAG="SingleView";
@@ -157,6 +159,9 @@ public class SingleViewActivity extends AppCompatActivity {
 //        test(photo.getSrcUrl());
         File imageFile=getImageFile(photo);
 
+        File imagePath = new File(context.getFilesDir(), "images");
+        File newFile = new File(imagePath, photo.getName());
+        Uri contentUri = getUriForFile(context, "com.thephotoschoppe.fileprovider", newFile);
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 //                emailIntent.setType("plain/text");
 
@@ -167,7 +172,7 @@ public class SingleViewActivity extends AppCompatActivity {
 //        Picasso.with(context).load(imageFile).into(textImage);
 //        File imageFile=
 
-        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile));
+        emailIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,photo.getSrcUrl());
         startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 //                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///mnt/sdcard/Myimage.jpeg"));
@@ -189,7 +194,7 @@ public class SingleViewActivity extends AppCompatActivity {
         Log.d(TAG,"inside save to phone");
         Picasso.with(context)
                 .load(photo.getSrcUrl())
-                .into(picassoImageTarget(getApplicationContext(), "imageDir", photo.getName()));
+                .into(picassoImageTarget(getApplicationContext(), "images", photo.getName()));
 
 
     }
