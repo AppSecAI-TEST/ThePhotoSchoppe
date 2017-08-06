@@ -158,7 +158,7 @@ public class SingleViewActivity extends AppCompatActivity {
         saveToPhone(photo);
 //        test(photo.getSrcUrl());
         File imageFile=getImageFile(photo);
-
+Log.d(TAG,context.getFilesDir()+"");
         File imagePath = new File(context.getFilesDir(), "images");
         File newFile = new File(imagePath, photo.getName());
         Uri contentUri = getUriForFile(context, "com.thephotoschoppe.fileprovider", newFile);
@@ -192,6 +192,14 @@ public class SingleViewActivity extends AppCompatActivity {
 
     private void saveToPhone(Photo photo){
         Log.d(TAG,"inside save to phone");
+
+//        String FILENAME = "hello_file";
+//        String string = "hello world!";
+//
+//        FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//        fos.write(string.getBytes());
+//        fos.close();
+        Log.d("get application context",getApplicationContext()+"");
         Picasso.with(context)
                 .load(photo.getSrcUrl())
                 .into(picassoImageTarget(getApplicationContext(), "images", photo.getName()));

@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.acer.thephotoschoppe.R;
+import com.example.acer.thephotoschoppe.activities.BlankActivity;
+import com.example.acer.thephotoschoppe.activities.MainActivity;
+import com.example.acer.thephotoschoppe.activities.SignUpActivity;
 import com.example.acer.thephotoschoppe.flickr.FlickrManager;
 import com.example.acer.thephotoschoppe.models.Photo;
 import com.squareup.picasso.Picasso;
@@ -98,7 +101,14 @@ public class PortfolioFragment extends Fragment {
             super.onPostExecute(result);
 
             if(FlickrManager.getPhotos().size()==0){
-                Toast.makeText(context,"Please check your internet c onnection and relaunch the app.",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Please check your internet connection and relaunch the app.",Toast.LENGTH_LONG).show();
+                Intent intent =new Intent(context,BlankActivity.class);
+                intent.putExtra("view",2);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+
+
             }
             else {
                 gridView.setAdapter(new BaseAdapter() {

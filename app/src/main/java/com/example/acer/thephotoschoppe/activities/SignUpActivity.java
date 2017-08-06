@@ -78,6 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Something went wrong. Please reinstall.", Toast.LENGTH_SHORT).show();
                 Intent intent =new Intent(SignUpActivity.this,BlankActivity.class);
+                intent.putExtra("view",1);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
