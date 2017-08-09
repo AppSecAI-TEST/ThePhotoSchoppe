@@ -7,8 +7,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +41,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -156,9 +164,14 @@ public class SingleViewActivity extends AppCompatActivity {
         Photo photo = photos.get(position);
         //save photo to the phone
         saveToPhone(photo);
+
+
 //        test(photo.getSrcUrl());
-        File imageFile=getImageFile(photo);
-Log.d(TAG,context.getFilesDir()+"");
+      //  File imageFile=getImageFile(photo);
+
+
+        Log.d(TAG,context.getFilesDir()+"");
+
         File imagePath = new File(context.getFilesDir(), "images");
         File newFile = new File(imagePath, photo.getName());
         Uri contentUri = getUriForFile(context, "com.thephotoschoppe.fileprovider", newFile);
@@ -192,17 +205,12 @@ Log.d(TAG,context.getFilesDir()+"");
 
     private void saveToPhone(Photo photo){
         Log.d(TAG,"inside save to phone");
+        new DownloadImage().execute();
 
-//        String FILENAME = "hello_file";
-//        String string = "hello world!";
-//
-//        FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-//        fos.write(string.getBytes());
-//        fos.close();
-        Log.d("get application context",getApplicationContext()+"");
-        Picasso.with(context)
-                .load(photo.getSrcUrl())
-                .into(picassoImageTarget(getApplicationContext(), "images", photo.getName()));
+       // Log.d("get application context",getApplicationContext()+"");
+//        Picasso.with(context)
+//                .load(photo.getSrcUrl())
+//                .into(picassoImageTarget(getApplicationContext(), "images", photo.getName()));
 
 
     }
@@ -256,6 +264,132 @@ Log.d(TAG,context.getFilesDir()+"");
                 if (placeHolderDrawable != null) {}
             }
         };
+    }
+
+
+
+    public String getUrl(){
+        return photos.get(position).getSrcUrl();
+    }
+
+
+
+    private class DownloadImage extends AsyncTask<Void, Void, Void> {
+
+        private Bitmap bitmap = null;
+        Message msg;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+
+            if(checkInternetConnection()){
+                InputStream in=null;
+
+
+                msg.what=1;
+                try{
+                    in=openHttpConnection(getUrl());
+                    bitmap= BitmapFactory.decodeStream(in);
+                    Bundle bundle=new Bundle();
+                    bundle.putParcelable("bitmap",bitmap);
+                    msg.setData(bundle);
+                    in.close();
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            messageHandler.sendMessage(msg);
+
+
+
+        }
+
+        private Handler messageHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                Bitmap bitmapImage= msg.getData().getParcelable("bitmap");
+                //write to the file
+
+                String filename = "images";
+                String string = "Hello world!";
+                FileOutputStream outputStream;
+
+                try {
+                    outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+                    outputStream.write(string.getBytes());
+                    outputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+
+        private InputStream openHttpConnection(String url){
+            InputStream in=null;
+            int resCode= -1;
+            try {
+                URL urlStr=new URL(url);
+                URLConnection urlConn = urlStr.openConnection();
+                if(!(urlConn instanceof HttpURLConnection)){
+                    throw new IOException("URL is not a http url");
+                }
+
+                HttpURLConnection httpConn=(HttpURLConnection)urlConn;
+                httpConn.setAllowUserInteraction(false);
+                httpConn.setInstanceFollowRedirects(true);
+                httpConn.setRequestMethod("GET");
+                httpConn.connect();
+                resCode=httpConn.getResponseCode();
+                if(resCode==HttpURLConnection.HTTP_OK){
+                    in = httpConn.getInputStream();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return in;
+        }
+
+        private boolean checkInternetConnection(){
+            ConnectivityManager connect=(ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+
+            if(connect.getActiveNetworkInfo().getState() ==
+                    android.net.NetworkInfo.State.CONNECTED ||
+                    connect.getActiveNetworkInfo().getState() ==
+                            NetworkInfo.State.CONNECTING){
+
+
+                return true;
+            }
+            else if(connect.getActiveNetworkInfo().getState() ==
+                    NetworkInfo.State.DISCONNECTED){
+
+
+                return  false;
+            }
+            return false;
+        }
     }
 //    private static Target getTarget(final String url){
 //        Log.d(TAG,"inside target");
