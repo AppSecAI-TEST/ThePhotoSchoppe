@@ -137,6 +137,7 @@ public class SingleViewActivity extends AppCompatActivity {
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + photos.get(position).getName());
             try {
+                //should check run time permissions to upper android versions
                 boolean newFile = file.createNewFile();
                 Log.d(TAG,"bool val : "+newFile);
                 FileOutputStream outputStream = new FileOutputStream(file);
