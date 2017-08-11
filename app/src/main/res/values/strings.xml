@@ -61,5 +61,6 @@
 
     <string name="sign_up_first"><b><u>Sign Up First</u></b></string>
 
+    <string name="forget_password"><b><u>Forget Password</u></b></string>
 
 </resources>
