@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +35,6 @@ public class SingleViewActivity extends AppCompatActivity {
     private static final String TAG="SingleView";
     private ImageView imageView;
     private TextView titleTV;
-    private String path;
 
     Context context;
     private int position;
@@ -142,7 +140,7 @@ public class SingleViewActivity extends AppCompatActivity {
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + photos.get(position).getName());
             try {
-                //should check run time permissions to upper android versions
+
                 while (true){
                     if(isStoragePermissionGranted()){
                         boolean newFile = file.createNewFile();
@@ -175,15 +173,23 @@ public class SingleViewActivity extends AppCompatActivity {
         Picasso.with(getApplicationContext()).load(photos.get(position).getSrcUrl()).into(target);
         File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + photos.get(position).getName());
         if (file.exists()) {
+
             Uri uri = Uri.fromFile(file);
-            Intent mail_intent = new Intent(Intent.ACTION_SEND);
-            mail_intent.setData(Uri.parse("mailTo:"));
-            mail_intent.setType("text/plain");
-            mail_intent.putExtra(Intent.EXTRA_EMAIL, " ");
-            mail_intent.putExtra(Intent.EXTRA_CC, " ");
-            mail_intent.putExtra(Intent.EXTRA_SUBJECT, " ");
-            mail_intent.putExtra(Intent.EXTRA_STREAM, uri);
-            startActivity(Intent.createChooser(mail_intent, "send mail.."));
+
+            //Create the Intent
+            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+            //Fill it with Data
+            emailIntent.setType("plain/text");
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "[Photo attached from Photo Shoppe]");
+            emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+
+            //Send it off to the Activity-Chooser
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+
+
+
         }
 
     }
@@ -208,12 +214,12 @@ public class SingleViewActivity extends AppCompatActivity {
             } else {
 
                 Log.v(TAG,"Permission is revoked");
+
                 String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE"};
 
                 int permsRequestCode = 200;
 
                 requestPermissions(perms, permsRequestCode);
-                //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
         }
